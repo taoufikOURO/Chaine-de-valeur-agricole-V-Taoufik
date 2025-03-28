@@ -18,6 +18,7 @@ return new class extends Migration
             $table->float('surface');
             $table->string('adresse');
             $table->foreignId('statut_id')->constrained('statuts')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
