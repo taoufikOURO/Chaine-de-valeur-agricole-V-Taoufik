@@ -9,6 +9,26 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+    public function role() {
+        return $this->belongsTo(Role::class);
+    }
+    public function semis() {
+        return $this->hasMany(Semis::class);
+    }
+
+    public function arrosage() {
+        return $this->hasMany(Arrosage::class);
+    }
+    public function parcelle() {
+        return $this->hasMany(Parcelle::class);
+    }
+    public function fertilisation() {
+        return $this->hasMany(Fertilisation::class);
+    }
+    public function recolte() {
+        return $this->hasMany(Recolte::class);
+    }
+
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
@@ -18,8 +38,13 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'usermname',
         'email',
+        'phone_number',
+        'first_name',
+        'last_name',
+        'active',
+        'role_id',
         'password',
     ];
 
