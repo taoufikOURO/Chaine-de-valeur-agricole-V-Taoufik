@@ -17,9 +17,7 @@ return new class extends Migration
             $table->date('date_recolte')->default(Date::now());
             $table->float('quantite_recolte')->default(0);
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('semis_id')->constrained('semis')->onDelete('cascade');
             $table->foreignId('parcelle_id')->constrained('parcelles')->onDelete('cascade');
-            $table->foreignId('semis_id')->nullable()->constrained('semis')->onDelete('cascade');
             $table->timestamps();
         });
     }
