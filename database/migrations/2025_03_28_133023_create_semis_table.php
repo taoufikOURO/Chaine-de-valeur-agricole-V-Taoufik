@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('culture_id')->constrained('cultures')->onDelete('cascade');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('parcelle_id')->constrained('parcelles')->onDelete('cascade');
-
+            $table->foreignId('recolte_id')->nullable()->constrained('recoltes')->onDelete('cascade');
             $table->timestamps();
         });
     }
