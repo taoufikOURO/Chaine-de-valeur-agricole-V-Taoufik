@@ -9,4 +9,8 @@ class TypeCulture extends Model
     public function culture() {
         return $this->hasMany(Culture::class);
     }
+    protected $fillable = [
+        'code',
+        'libelle',
+    ];
 }

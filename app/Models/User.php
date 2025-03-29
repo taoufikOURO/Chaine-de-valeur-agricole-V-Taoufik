@@ -9,23 +9,29 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    public function role() {
+    public function role()
+    {
         return $this->belongsTo(Role::class);
     }
-    public function semis() {
+    public function semis()
+    {
         return $this->hasMany(Semis::class);
     }
 
-    public function arrosage() {
+    public function arrosage()
+    {
         return $this->hasMany(Arrosage::class);
     }
-    public function parcelle() {
+    public function parcelle()
+    {
         return $this->hasMany(Parcelle::class);
     }
-    public function fertilisation() {
+    public function fertilisation()
+    {
         return $this->hasMany(Fertilisation::class);
     }
-    public function recolte() {
+    public function recolte()
+    {
         return $this->hasMany(Recolte::class);
     }
 

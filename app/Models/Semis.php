@@ -22,4 +22,12 @@ class Semis extends Model
         return $this->belongsTo(Parcelle::class);
     }
 
+    protected $fillable = [
+        'date_semis',
+        'culture_id',
+        'user_id',
+        'parcelle_id',
+        'recolte_id',
+    ];
+
 }
