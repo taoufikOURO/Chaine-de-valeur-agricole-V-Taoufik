@@ -124,7 +124,7 @@
                     </button>
 
                     <div class="dropdown-content" id="profile-dropdown">
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item" href="{{route('profile')}}">
                             <i class="fas fa-user-circle"></i>
                             <span>Mon profil</span>
                         </a>
