@@ -32,67 +32,76 @@
         <div class="sidebar-content">
             <nav class="mt-6">
                 <a href="#" class="nav-item active">
-                    <i class="fas fa-home"></i>
+                    <i class="fas fa-chart-line"></i>
                     <span class="nav-text">Tableau de bord</span>
                 </a>
-
+                <div class="section-title">Parcelles</div>
                 <a href="#" class="nav-item">
-                    <i class="fas fa-leaf"></i>
-                    <span class="nav-text">Cultures</span>
+                    <i class="fa-brands fa-buromobelexperte"></i>
+                    <span class="nav-text">Liste des parcelles</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fa-solid fa-plus"></i>
+                    <span class="nav-text">Ajouter une parcelle</span>
                 </a>
 
+                <div class="section-title">Cultures et types de culture</div>
                 <a href="#" class="nav-item">
-                    <i class="fas fa-tractor"></i>
-                    <span class="nav-text">Équipements</span>
+                    <i class="fa-solid fa-leaf"></i>
+                    <span class="nav-text">Liste des cultures</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fa-solid fa-plus"></i>
+                    <span class="nav-text">Ajouter une culture</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fa-solid fa-leaf"></i>
+                    <span class="nav-text">Liste des types de culture</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fa-solid fa-plus"></i>
+                    <span class="nav-text">Ajouter un type de culture</span>
                 </a>
 
+                <div class="section-title">Actions sur parcelles</div>
                 <a href="#" class="nav-item">
-                    <i class="fas fa-chart-line"></i>
-                    <span class="nav-text">Analyses</span>
+                    <i class="fa-solid fa-wheat-awn"></i>
+                    <span class="nav-text">Liste des semis</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fa-solid fa-plus"></i>
+                    <span class="nav-text">Effectuer un semis</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fa-solid fa-droplet"></i>
+                    <span class="nav-text">Arroser un semis</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fa-solid fa-warehouse"></i>
+                    <span class="nav-text">Recolter un semis</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fa-solid fa-list"></i>
+                    <span class="nav-text">Liste des recoltes</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fa-solid fa-poop"></i>
+                    <span class="nav-text">Fertiliser un champ</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fa-solid fa-list"></i>
+                    <span class="nav-text">Liste des fertilisations</span>
                 </a>
 
-                <a href="#" class="nav-item">
-                    <i class="fas fa-cloud-sun-rain"></i>
-                    <span class="nav-text">Météo</span>
-                </a>
-
-                <div class="section-title">Gestion</div>
+                <div class="section-title">Utilisateurs</div>
 
                 <a href="#" class="nav-item">
                     <i class="fas fa-users"></i>
-                    <span class="nav-text">Personnel</span>
+                    <span class="nav-text">Liste des utilisateurs</span>
                 </a>
-
                 <a href="#" class="nav-item">
-                    <i class="fas fa-file-invoice-dollar"></i>
-                    <span class="nav-text">Finances</span>
-                </a>
-
-                <a href="#" class="nav-item">
-                    <i class="fas fa-warehouse"></i>
-                    <span class="nav-text">Inventaire</span>
-                </a>
-
-                <div class="section-title">Paramètres</div>
-
-                <a href="#" class="nav-item">
-                    <i class="fas fa-cog"></i>
-                    <span class="nav-text">Configuration</span>
-                </a>
-
-                <a href="#" class="nav-item">
-                    <i class="fas fa-shield-alt"></i>
-                    <span class="nav-text">Sécurité</span>
-                </a>
-
-                <a href="#" class="nav-item">
-                    <i class="fas fa-bell"></i>
-                    <span class="nav-text">Notifications</span>
-                </a>
-
-                <a href="#" class="nav-item">
-                    <i class="fas fa-question-circle"></i>
-                    <span class="nav-text">Aide</span>
+                    <i class="fa-solid fa-user-plus"></i>
+                    <span class="nav-text">Ajouter un utilisateur</span>
                 </a>
             </nav>
         </div>
