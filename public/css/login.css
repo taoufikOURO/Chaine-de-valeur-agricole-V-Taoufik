@@ -1,0 +1,43 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+
+body {
+    font-family: "SF Pro Display", "SF Pro Text", "Inter", -apple-system,
+        BlinkMacSystemFont, sans-serif;
+    background-color: #f8f8f8;
+}
+
+.login-container {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+    background-color: white;
+}
+
+.form-input {
+    border: 1px solid #e2e2e2;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.form-input:focus {
+    border-color: #333;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+    outline: none;
+}
+
+.login-button {
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.logo {
+    height: 100px;
+    width: auto;
+    border-radius: 8px;
+    padding: 8px;
+}

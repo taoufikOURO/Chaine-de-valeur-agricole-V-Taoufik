@@ -8,6 +8,7 @@
     <title>Traçabilité Professionnelle</title>
     <link rel="stylesheet" href="{{ asset('css/welcome.css') }}">
     @vite('resources/css/app.css')
+    <link rel="icon" type="image/svg" href="{{ asset('logo.svg') }}">
 </head>
 
 
@@ -35,7 +36,7 @@
                     <p class="text-lg md:text-xl text-gray-600 max-w-2xl mb-12">
                         Une solution de traçabilité experte pour les professionnels exigeants.
                     </p>
-                    <a href="#"
+                    <a href="{{route('login.page')}}"
                         class="bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-8 rounded-full transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg">
                         Se connecter
                     </a>
