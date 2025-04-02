@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('types_culture', function (Blueprint $table) {
+        Schema::create('type_cultures', function (Blueprint $table) {
             $table->id();
             $table->string('code')->unique();
             $table->string('libelle')->unique();
