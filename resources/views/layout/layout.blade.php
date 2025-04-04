@@ -31,7 +31,7 @@
 
         <div class="sidebar-content">
             <nav class="mt-6">
-                <a href="#" class="nav-item active">
+                <a href="{{ route('dashboard') }}" class="nav-item @if (Route::current()->uri() == "dashboard")  active @endif ">
                     <i class="fas fa-chart-line"></i>
                     <span class="nav-text">Tableau de bord</span>
                 </a>
@@ -54,11 +54,11 @@
                     <i class="fa-solid fa-plus"></i>
                     <span class="nav-text">Ajouter une culture</span>
                 </a>
-                <a href="#" class="nav-item">
+                <a href="{{ route('type-culture.index') }}" class="nav-item @if (Route::current()->uri() == "type-culture")  active @endif">
                     <i class="fa-solid fa-leaf"></i>
                     <span class="nav-text">Liste des types de culture</span>
                 </a>
-                <a href="#" class="nav-item">
+                <a href="{{ route('type-culture.create') }}" class="nav-item @if (Route::current()->uri() == "type-culture/create")  active @endif">
                     <i class="fa-solid fa-plus"></i>
                     <span class="nav-text">Ajouter un type de culture</span>
                 </a>
@@ -109,7 +109,7 @@
 
     <div class="main-content">
         <header class="header px-6 flex items-center justify-between">
-            <h1 class="text-xl font-semibold text-gray-800"> @yield('title', 'Taoufik,noublie pas de completer le titre')</h1>
+            <h1 class="text-xl font-semibold text-gray-800"></h1>
 
             <div class="flex items-center gap-4">
 
@@ -124,7 +124,7 @@
                     </button>
 
                     <div class="dropdown-content" id="profile-dropdown">
-                        <a class="dropdown-item" href="{{route('profile')}}">
+                        <a class="dropdown-item" href="{{ route('profile') }}">
                             <i class="fas fa-user-circle"></i>
                             <span>Mon profil</span>
                         </a>
@@ -146,54 +146,6 @@
             @yield('content')
         </div>
     </div>
-    @include('components.confirmation-modal', [
-        'title' => 'Confirmer la déconnexion',
-        'message' => 'Êtes-vous sûr de vouloir vous déconnecter ?',
-        'confirmText' => 'Déconnexion',
-        'cancelText' => 'Annuler',
-    ])
-
-    <script src="{{ asset('js/adminTemplate.js') }}"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const logoutButton = document.getElementById('logout-button');
-            const logoutForm = document.getElementById('logout-form');
-            const modal = document.getElementById('formConfirmationModal');
-            const confirmButton = document.getElementById('confirmFormSubmission');
-            const cancelButton = document.getElementById('cancelFormSubmission');
-            const closeButtons = document.querySelectorAll('.modal-close');
-
-            // Show modal when logout button is clicked
-            logoutButton.addEventListener('click', function(e) {
-                e.preventDefault();
-                modal.classList.remove('hidden');
-            });
-
-            // Submit form when confirm button is clicked
-            confirmButton.addEventListener('click', function() {
-                logoutForm.submit();
-            });
-
-            // Hide modal when cancel button is clicked
-            cancelButton.addEventListener('click', function() {
-                modal.classList.add('hidden');
-            });
-
-            // Hide modal when close button is clicked
-            closeButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    modal.classList.add('hidden');
-                });
-            });
-
-            // Hide modal when clicking outside
-            modal.addEventListener('click', function(e) {
-                if (e.target.classList.contains('modal-backdrop')) {
-                    modal.classList.add('hidden');
-                }
-            });
-        });
-    </script>
     <script src="{{ asset('js/adminTemplate.js') }}"></script>
 </body>
 

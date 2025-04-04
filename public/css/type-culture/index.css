@@ -1,0 +1,229 @@
+:root {
+    /* Couleurs adoucies */
+    --agri-green-100: #eef6ee;
+    --agri-green-200: #ddeedd;
+    --agri-green-300: #c5dfc5;
+    --agri-green-400: #a8cba8;
+    --agri-green-500: #7aad7a;
+    --agri-green-600: #5e935e;
+    --agri-green-700: #4a7a4a;
+    --agri-green-800: #3a613a;
+
+    /* Nouvelles couleurs bleues */
+    --blue-100: #e6f1ff;
+    --blue-200: #cce3ff;
+    --blue-300: #99c8ff;
+    --blue-400: #66adff;
+    --blue-500: #3392ff;
+    --blue-600: #0077ff;
+    --blue-700: #0062d6;
+    --blue-800: #004eb0;
+}
+
+body {
+    font-family: "Inter", "SF Pro Display", system-ui, sans-serif;
+    background-color: #f9fafb;
+    color: #334155;
+}
+
+.bg-agri-green-100 {
+    background-color: var(--agri-green-100);
+}
+
+.bg-agri-green-500 {
+    background-color: var(--agri-green-500);
+}
+
+.bg-agri-green-600 {
+    background-color: var(--agri-green-600);
+}
+
+.bg-agri-green-700 {
+    background-color: var(--agri-green-700);
+}
+
+.bg-blue-500 {
+    background-color: var(--blue-500);
+}
+
+.bg-blue-600 {
+    background-color: var(--blue-600);
+}
+
+.bg-blue-700 {
+    background-color: var(--blue-700);
+}
+
+.text-agri-green-500 {
+    color: var(--agri-green-500);
+}
+
+.text-agri-green-700 {
+    color: var(--agri-green-700);
+}
+
+.text-blue-500 {
+    color: var(--blue-500);
+}
+
+.text-blue-700 {
+    color: var(--blue-700);
+}
+
+.border-agri-green-200 {
+    border-color: var(--agri-green-200);
+}
+
+.border-agri-green-300 {
+    border-color: var(--agri-green-300);
+}
+
+.border-blue-200 {
+    border-color: var(--blue-200);
+}
+
+.border-blue-300 {
+    border-color: var(--blue-300);
+}
+
+.table-container {
+    box-shadow: 0 4px 16px -4px rgba(0, 0, 0, 0.05),
+        0 2px 8px -2px rgba(0, 0, 0, 0.03);
+    border-radius: 0.85rem;
+    overflow: hidden;
+    border: 1px solid #f0f0f0;
+}
+
+.data-table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+}
+
+.data-table {
+    background: linear-gradient(to right, #4a7a4a, #3e6c3e);
+}
+
+.data-table th {
+    padding: 1.2rem 1.5rem;
+    font-weight: 600;
+    text-align: left;
+    color: white;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+}
+
+.data-table tbody tr {
+    transition: all 0.28s ease-out;
+    border-bottom: 1px solid #f0f0f0;
+    background-color: white;
+}
+
+.data-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.data-table tbody tr:hover {
+    background-color: #f8faff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px -4px rgba(0, 0, 0, 0.05);
+}
+
+.data-table td {
+    padding: 1.2rem 1.5rem;
+    vertical-align: middle;
+}
+
+.search-container {
+    position: relative;
+    max-width: 32rem;
+}
+
+.search-icon {
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    transform: translateY(-50%);
+    color: #9ca3af;
+}
+
+.search-input {
+    padding: 0.875rem 1rem 0.875rem 2.5rem;
+    border: 2px solid #e5e7eb;
+    border-radius: 0.75rem;
+    width: 100%;
+    transition: all 0.25s ease;
+    background-color: white;
+    font-size: 0.95rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--agri-green-500);
+    box-shadow: 0 0 0 4px rgba(122, 173, 122, 0.12);
+}
+
+.empty-state {
+    display: none;
+    padding: 3.5rem 2rem;
+    text-align: center;
+    background-color: white;
+    border-radius: 0.85rem;
+    box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.05);
+    margin: 2rem 0;
+    border: 1px dashed #e5e7eb;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.4s ease-out;
+}
+
+.code-cell {
+    font-family: "SF Mono", "Menlo", "Monaco", "Consolas", monospace;
+    font-size: 0.875rem;
+    padding: 0.35rem 0.7rem;
+    background-color: #f1f5f9;
+    border-radius: 0.5rem;
+    color: #334155;
+    display: inline-block;
+    border: 1px solid #e2e8f0;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+}
+
+.page-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    position: relative;
+}
+
+.page-header:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 60px;
+    background: linear-gradient(
+        to right,
+        var(--agri-green-500),
+        var(--agri-green-200)
+    );
+    border-radius: 2px;
+}
+
