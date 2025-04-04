@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('code')->unique();
             $table->string('nom')->unique();
-            $table->foreignId('type_culture_id')->constrained('types_culture')->onDelete('cascade');
+            $table->foreignId('type_culture_id')->constrained('type_cultures')->onDelete('cascade');
             $table->timestamps();
         });
     }
