@@ -64,11 +64,11 @@
                 </a>
 
                 <div class="section-title">Actions sur parcelles</div>
-                <a href="#" class="nav-item">
+                <a href="{{route('semis.index')}}" class="nav-item @if (Route::current()->uri() == "semis")  active @endif">
                     <i class="fa-solid fa-wheat-awn"></i>
                     <span class="nav-text">Liste des semis</span>
                 </a>
-                <a href="#" class="nav-item">
+                <a href="{{route('semis.create')}}" class="nav-item @if (Route::current()->uri() == "semis/create")  active @endif">
                     <i class="fa-solid fa-plus"></i>
                     <span class="nav-text">Effectuer un semis</span>
                 </a>
