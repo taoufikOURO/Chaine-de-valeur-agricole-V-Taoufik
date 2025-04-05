@@ -51,7 +51,7 @@
     <body class="bg-gray-50">
         <div class="flex min-h-screen">
 
-            <div class="flex-1 p-8 bg-gradient-to-br from-green-50/50 to-emerald-100/50">
+            <div class="flex-1 p-8 bg-gradient-to-br">
                 <div class="max-w-4xl mx-auto">
                     <div class="mb-8 flex justify-between items-center">
                         <div>
