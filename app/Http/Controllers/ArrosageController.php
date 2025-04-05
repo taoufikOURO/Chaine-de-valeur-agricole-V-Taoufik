@@ -45,7 +45,7 @@ class ArrosageController extends Controller
         $fields['user_id'] = Auth::user()->id;
         try {
             Arrosage::create($fields);
-            return redirect()->route('arrosage.create')->with([
+            return redirect()->route('semis.index')->with([
                 'showSuccessModal' => true,
                 'successTitle' => 'Opération réussie',
                 'successMessage' => 'Votre semis a été arrosée avec succès',
