@@ -36,11 +36,11 @@
                     <span class="nav-text">Tableau de bord</span>
                 </a>
                 <div class="section-title">Parcelles</div>
-                <a href="#" class="nav-item">
+                <a href="{{route('parcelle.index')}}"  class="nav-item @if (Route::current()->uri() == "parcelle")  active @endif ">
                     <i class="fa-brands fa-buromobelexperte"></i>
                     <span class="nav-text">Liste des parcelles</span>
                 </a>
-                <a href="#" class="nav-item">
+                <a href="{{route('parcelle.create')}}"  class="nav-item @if (Route::current()->uri() == "parcelle/create")  active @endif ">
                     <i class="fa-solid fa-plus"></i>
                     <span class="nav-text">Ajouter une parcelle</span>
                 </a>
