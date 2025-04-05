@@ -72,7 +72,7 @@
                     <i class="fa-solid fa-plus"></i>
                     <span class="nav-text">Effectuer un semis</span>
                 </a>
-                <a href="#" class="nav-item">
+                <a href="{{route('arrosage.create')}}" class="nav-item @if (Route::current()->uri() == "arrosage/create")  active @endif">
                     <i class="fa-solid fa-droplet"></i>
                     <span class="nav-text">Arroser un semis</span>
                 </a>
