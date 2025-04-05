@@ -19,9 +19,6 @@
             <div class="mb-8 flex justify-between items-center">
                 <div>
                     <h1 class="text-4xl font-bold text-gray-900 mb-2 flex items-center">
-                        <span class="bg-emerald-100 text-emerald-800 p-3 rounded-2xl mr-4">
-                            @include('components.logo')
-                        </span>
                         Liste des semis
                     </h1>
                     <p class="text-emerald-600 font-medium ml-16">visualiser tout mes semis non recoltés sur ma parcelle</p>
