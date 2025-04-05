@@ -41,6 +41,13 @@
                             autocomplete="off">
 
                     </div>
+                    <a href="{{ route('fertilisation.create') }}"
+                        class="cursor-pointer group relative flex items-center gap-3 bg-gradient-to-r from-indigo-500 to-indigo-600 text-white py-2.5 px-5 rounded-lg transition-all duration-300 ease-in-out transform hover:scale-105 shadow-md hover:shadow-lg overflow-hidden font-medium">
+                        <span
+                            class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-20 transform -translate-x-full group-hover:translate-x-full transition-all duration-1000 ease-out"></span>
+                        <i class="fa-solid fa-poop h-5 w-5 transition-transform duration-300 group-hover:rotate-2"></i>
+                        <span class="relative z-10">Fertiliser</span>
+                    </a>
                     <a href="{{ route('parcelle.create') }}"
                         class="cursor-pointer group relative flex items-center gap-3 bg-gradient-to-r from-indigo-500 to-indigo-600 text-white py-2.5 px-5 rounded-lg transition-all duration-300 ease-in-out transform hover:scale-105 shadow-md hover:shadow-lg overflow-hidden font-medium">
                         <span
