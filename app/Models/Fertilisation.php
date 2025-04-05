@@ -18,5 +18,6 @@ class Fertilisation extends Model
         'date_fertilisation',
         'user_id',
         'parcelle_id',
+        'description'
     ];
 }
