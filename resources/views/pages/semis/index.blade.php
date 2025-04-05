@@ -39,8 +39,8 @@
                                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                         </div>
-                        <input type="text" id="searchInput" class="search-input" placeholder="Rechercher par le nom de la culture..."
-                            autocomplete="off">
+                        <input type="text" id="searchInput" class="search-input"
+                            placeholder="Rechercher par le nom de la culture..." autocomplete="off">
 
                     </div>
                     <a href="{{ route('type-culture.create') }}"
@@ -57,6 +57,21 @@
                         </svg>
                         <span class="relative z-10">Ajouter</span>
                     </a>
+                    <a href="{{route('recolte.create')}}"
+                        class="cursor-pointer group relative flex items-center gap-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white py-2.5 px-5 rounded-lg transition-all duration-300 ease-in-out transform hover:scale-105 shadow-md hover:shadow-lg overflow-hidden font-medium">
+                        <span
+                            class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-20 transform -translate-x-full group-hover:translate-x-full transition-all duration-1000 ease-out"></span>
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            class="h-5 w-5 transition-transform duration-300 group-hover:rotate-12" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7">
+                            </path>
+                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z">
+                            </path>
+                        </svg>
+                        <span class="relative z-10">Récolter</span>
+                    </a>
                 </div>
             </div>
 
@@ -68,7 +83,6 @@
                             <th class="w-2/6">Date</th>
                             <th class="w-2/6">Culture</th>
                             <th class="w-2/6">Parcelle</th>
-                            <th class="w-2/6">Actions</th>
                         </tr>
                     </thead>
                     <tbody id="tableBody">
@@ -77,31 +91,10 @@
                                 <td>
                                     {{ $item->date_semis }}
                                 </td>
-                                <td>{{ $item->culture->nom }} | <span class="text-green-500">{{ $item->culture->typeCulture->libelle }}</span> </td>
-                                <td>{{ $item->parcelle->nom }} <span class="text-green-500">|</span> {{ $item->parcelle->surface }} m²</td>
-                                <td>
-                                    <div class="flex gap-2">
-                                        <form action="{{ route('semis.edit', $item->id) }}" method="GET">
-                                            @csrf
-                                            <button type="submit"
-                                                class="cursor-pointer group relative flex items-center gap-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white py-2.5 px-5 rounded-lg transition-all duration-300 ease-in-out transform hover:scale-105 shadow-md hover:shadow-lg overflow-hidden font-medium">
-                                                <span
-                                                    class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-20 transform -translate-x-full group-hover:translate-x-full transition-all duration-1000 ease-out"></span>
-                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                    class="h-5 w-5 transition-transform duration-300 group-hover:rotate-12"
-                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7">
-                                                    </path>
-                                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z">
-                                                    </path>
-                                                </svg>
-                                                <span class="relative z-10">Récolter</span>
-                                            </button>
-                                        </form>
-
-                                    </div>
-                                </td>
+                                <td>{{ $item->culture->nom }} | <span
+                                        class="text-green-500">{{ $item->culture->typeCulture->libelle }}</span> </td>
+                                <td>{{ $item->parcelle->nom }} <span class="text-green-500">|</span>
+                                    {{ $item->parcelle->surface }} m²</td>
                             </tr>
                         @endforeach
                     </tbody>
