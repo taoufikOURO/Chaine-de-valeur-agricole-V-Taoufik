@@ -43,7 +43,7 @@
                             placeholder="Rechercher par le nom de la culture..." autocomplete="off">
 
                     </div>
-                    <a href="{{ route('type-culture.create') }}"
+                    <a href="{{ route('semis.create') }}"
                         class="cursor-pointer group relative flex items-center gap-3 bg-gradient-to-r from-indigo-500 to-indigo-600 text-white py-2.5 px-5 rounded-lg transition-all duration-300 ease-in-out transform hover:scale-105 shadow-md hover:shadow-lg overflow-hidden font-medium">
                         <span
                             class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-20 transform -translate-x-full group-hover:translate-x-full transition-all duration-1000 ease-out"></span>
