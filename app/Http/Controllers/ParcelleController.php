@@ -90,9 +90,10 @@ class ParcelleController extends Controller
     public function edit(string $id)
     {
         $parcelle = Parcelle::findOrFail($id);
+        $statuts = Statut::all();
         return view(
             'pages.parcelle.edit',
-            compact('parcelle')
+            compact('parcelle', 'statuts')
         );
     }
 
@@ -105,6 +106,7 @@ class ParcelleController extends Controller
             "nom" => 'required|string|max:255|min:3',
             "surface" => 'required|numeric',
             "adresse" => 'required|string|max:255|min:3',
+            "statut_id" => "nullable",
         ], [
             "nom.required" => "Le libelle est obligatoire",
             "nom.max" => "Le libelle ne doit pas dépasser 255 caractères",

@@ -111,6 +111,17 @@
                                 {{ $message }}
                             </span>
                         @enderror
+                        <div class="relative bg-gradient-to-b from-white to-gray-50 rounded-xl p-1 shadow-inner">
+                            <select type="text" required name="statut_id" required
+                                class="w-full pl-10 pr-4 py-3.5 rounded-xl border-0 ring-1 ring-gray-200 focus:ring-2 focus:border bg-transparent transition duration-200">
+                                <option value="" disabled selected> Veuillez sélectionnez un statut pour votre parcelle </option>
+                                @foreach ($statuts as $statut)
+                                    @unless (in_array($statut->libelle, ['en_culture', 'recoltee']))
+                                        <option value="{{ $statut->id }}">En Jachère</option>
+                                    @endunless
+                                @endforeach
+                            </select>
+                        </div>
 
                         <button type="submit"
                             class=" mt-5 w-full group relative overflow-hidden bg-gradient-to-r from-emerald-600 to-emerald-700 text-white rounded-xl px-4 py-5 font-medium hover:from-emerald-700 hover:to-emerald-800 transition duration-300 shadow-lg hover:shadow-emerald-200/50 cursor-pointer">
