@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArrosageController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CultureController;
 use App\Http\Controllers\FertilisationController;
@@ -13,11 +14,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/login', [AuthController::class,'loginPage'])->name('login.page');
-Route::post('/login', [AuthController::class,'login'])->name('login');
-Route::post('/logout', [AuthController::class,'logout'])->name('logout');
-Route::get('/dashboard', [AuthController::class,'dashboard'])->name('dashboard');
-Route::get('/profile', [UserController::class,'profile'])->name('profile');
+Route::get('/login', [AuthController::class, 'loginPage'])->name('login.page');
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
+Route::get('/profile', [UserController::class, 'profile'])->name('profile');
 
 Route::resource('type-culture', TypeCultureController::class);
 Route::resource('culture', CultureController::class);
@@ -25,3 +26,4 @@ Route::resource('parcelle', ParcelleController::class);
 Route::resource('semis', SemisController::class);
 Route::resource('recolte', RecolteController::class);
 Route::resource('fertilisation', FertilisationController::class);
+Route::resource('arrosage', ArrosageController::class);
