@@ -76,11 +76,11 @@
                     <i class="fa-solid fa-droplet"></i>
                     <span class="nav-text">Arroser un semis</span>
                 </a>
-                <a href="#" class="nav-item">
+                <a href="{{route('recolte.create')}}" class="nav-item @if (Route::current()->uri() == "recolte/create")  active @endif">
                     <i class="fa-solid fa-warehouse"></i>
                     <span class="nav-text">Recolter un semis</span>
                 </a>
-                <a href="#" class="nav-item">
+                <a href="{{route('recolte.index')}}" class="nav-item @if (Route::current()->uri() == "recolte")  active @endif">
                     <i class="fa-solid fa-list"></i>
                     <span class="nav-text">Liste des recoltes</span>
                 </a>
