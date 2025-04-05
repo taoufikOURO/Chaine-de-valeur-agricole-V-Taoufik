@@ -30,7 +30,7 @@ class SemisController extends Controller
     {
         $cultures = Culture::all();
         $parcelles = Parcelle::where('user_id', Auth::user()->id)
-            ->where('statut_id', [2,3])
+            ->where('statut_id', 3)
             ->get();
         return view('pages.semis.create', compact('cultures', 'parcelles'));
     }
