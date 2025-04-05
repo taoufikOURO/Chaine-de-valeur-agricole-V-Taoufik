@@ -21,7 +21,8 @@
         outline: none;
     }
 
-    input, select {
+    input,
+    select {
         padding: 0.875rem 1rem 0.875rem 2.5rem;
         border: 2px solid #e5e7eb;
         border-radius: 0.75rem;
@@ -32,7 +33,8 @@
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
     }
 
-    input:focus, select:focus {
+    input:focus,
+    select:focus {
         outline: none;
         border-color: var(--agri-green-500);
         box-shadow: 0 0 0 4px rgba(122, 173, 122, 0.12);
@@ -49,7 +51,7 @@
     <body class="bg-gray-50">
         <div class="flex min-h-screen">
 
-            <div class="flex-1 p-8 bg-gradient-to-br from-green-50/50 to-emerald-100/50">
+            <div class="flex-1 p-8 bg-gradient-to-br">
                 <div class="max-w-4xl mx-auto">
                     <div class="mb-8 flex justify-between items-center">
                         <div>
