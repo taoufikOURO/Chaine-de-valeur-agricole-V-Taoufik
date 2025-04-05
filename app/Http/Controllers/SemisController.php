@@ -30,7 +30,7 @@ class SemisController extends Controller
     {
         $cultures = Culture::all();
         $parcelles = Parcelle::where('user_id', Auth::user()->id)
-            ->where('statut_id', 3)
+            ->where('statut_id', [2,3])
             ->get();
         return view('pages.semis.create', compact('cultures', 'parcelles'));
     }
@@ -57,7 +57,7 @@ class SemisController extends Controller
             $parcelle->update([
                 "statut_id" => 1,
             ]);
-            return redirect()->route('parcelle.index')->with([
+            return redirect()->route('semis.index')->with([
                 'showSuccessModal' => true,
                 'successTitle' => 'Opération réussie',
                 'successMessage' => 'Votre semis a été ajoutée avec succès.',
