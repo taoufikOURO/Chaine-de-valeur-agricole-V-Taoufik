@@ -71,7 +71,7 @@ class ParcelleController extends Controller
             return back()->with([
                 'showErrorModal' => true,
                 'errorTitle' => 'Erreur lors de la création',
-                'errorMessage' => 'La parcelle n\'a pas pu être créé. Elle existe probablement déjà',
+                'errorMessage' => 'Une erreur est survenue lors de la création de la parcelle. Veuillez réessayer.',
             ]);
         }
     }
@@ -125,7 +125,7 @@ class ParcelleController extends Controller
             return back()->with([
                 'showErrorModal' => true,
                 'errorTitle' => 'Erreur lors de la modification',
-                'errorMessage' => 'Cette parcelle n\'a pas pu être modifiée, car une autre parcelle porte déjà ce nom.',
+                'errorMessage' => 'Une erreur est survenue lors de la modification de la parcelle',
             ]);
         }
     }
