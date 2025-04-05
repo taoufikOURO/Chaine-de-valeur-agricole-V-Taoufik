@@ -64,7 +64,7 @@
                         <i class="fa-solid fa-water h-5 w-5 transition-transform duration-300 group-hover:rotate-2"></i>
                         <span class="relative z-10">Arroser</span>
                     </a>
-                    <a href="{{route('recolte.create')}}"
+                    <a href="{{ route('recolte.create') }}"
                         class="cursor-pointer group relative flex items-center gap-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white py-2.5 px-5 rounded-lg transition-all duration-300 ease-in-out transform hover:scale-105 shadow-md hover:shadow-lg overflow-hidden font-medium">
                         <span
                             class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-20 transform -translate-x-full group-hover:translate-x-full transition-all duration-1000 ease-out"></span>
@@ -87,9 +87,10 @@
                 <table class="data-table">
                     <thead class="bg-emerald-600">
                         <tr>
-                            <th class="w-2/6">Date</th>
+                            <th class="w-1/6">Date</th>
                             <th class="w-2/6">Culture</th>
                             <th class="w-2/6">Parcelle</th>
+                            <th class="w-1/6">Nombre d'arrosage</th>
                         </tr>
                     </thead>
                     <tbody id="tableBody">
@@ -102,6 +103,9 @@
                                         class="text-green-500">{{ $item->culture->typeCulture->libelle }}</span> </td>
                                 <td>{{ $item->parcelle->nom }} <span class="text-green-500">|</span>
                                     {{ $item->parcelle->surface }} m²</td>
+                                <td>
+                                    {{ $item->arrosage_count }}
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>

@@ -19,7 +19,9 @@ class SemisController extends Controller
     {
         $semis = Semis::where("user_id", Auth::user()->id)
             ->where('recolte_id', null)
+            ->withCount('arrosage')
             ->get();
+        
         return view('pages.semis.index', compact('semis'));
     }
 
