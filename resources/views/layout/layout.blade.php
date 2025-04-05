@@ -46,11 +46,11 @@
                 </a>
 
                 <div class="section-title">Cultures et types de culture</div>
-                <a href="#" class="nav-item">
+                <a href="{{route('culture.index')}}" class="nav-item @if (Route::current()->uri() == "culture")  active @endif ">
                     <i class="fa-solid fa-leaf"></i>
                     <span class="nav-text">Liste des cultures</span>
                 </a>
-                <a href="#" class="nav-item">
+                <a href="{{route('culture.create')}}" class="nav-item @if (Route::current()->uri() == "culture/create")  active @endif">
                     <i class="fa-solid fa-plus"></i>
                     <span class="nav-text">Ajouter une culture</span>
                 </a>
