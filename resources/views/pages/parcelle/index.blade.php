@@ -63,11 +63,11 @@
                     <table class="data-table">
                         <thead class="bg-emerald-600">
                             <tr>
-                                <th class="w-2/6">Code</th>
+                                <th class="w-1/6">Code</th>
                                 <th class="w-1/6">Nom</th>
                                 <th class="w-1/6">Surface</th>
                                 <th class="w-1/6">Adresse</th>
-                                <th class="w-1/6">Statut</th>
+                                <th class="w-2/6">Statut</th>
                                 <th class="w-1/6">Actions</th>
                             </tr>
                         </thead>
@@ -80,7 +80,15 @@
                                     <td>{{ $parcelle->nom }}</td>
                                     <td>{{ $parcelle->surface }} m²</td>
                                     <td>{{ $parcelle->adresse }}</td>
-                                    <td>{{ $parcelle->statut->libelle }}</td>
+                                    <td>
+                                        @if ( $parcelle->statut->libelle == "en_culture")
+                                            @include('components.statuts.en-culture')
+                                        @elseif ( $parcelle->statut->libelle == "recoltee")
+                                            @include('components.statuts.recoltee')
+                                        @elseif ( $parcelle->statut->libelle == "en_jachere")
+                                            @include('components.statuts.en-jachere')
+                                        @endif
+                                    </td>
                                     <td>
                                         <div class="flex gap-2">
                                             <form action="{{ route('parcelle.edit', $parcelle->id) }}" method="GET">
