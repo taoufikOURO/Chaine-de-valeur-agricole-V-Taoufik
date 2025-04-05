@@ -84,11 +84,11 @@
                     <i class="fa-solid fa-list"></i>
                     <span class="nav-text">Liste des recoltes</span>
                 </a>
-                <a href="#" class="nav-item">
+                <a href="{{route('fertilisation.create')}}" class="nav-item @if (Route::current()->uri() == "fertilisation/create")  active @endif">
                     <i class="fa-solid fa-poop"></i>
                     <span class="nav-text">Fertiliser un champ</span>
                 </a>
-                <a href="#" class="nav-item">
+                <a href="{{route('fertilisation.index')}}" class="nav-item @if (Route::current()->uri() == "fertilisation")  active @endif">
                     <i class="fa-solid fa-list"></i>
                     <span class="nav-text">Liste des fertilisations</span>
                 </a>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CultureController;
+use App\Http\Controllers\FertilisationController;
 use App\Http\Controllers\ParcelleController;
 use App\Http\Controllers\RecolteController;
 use App\Http\Controllers\SemisController;
@@ -23,3 +24,4 @@ Route::resource('culture', CultureController::class);
 Route::resource('parcelle', ParcelleController::class);
 Route::resource('semis', SemisController::class);
 Route::resource('recolte', RecolteController::class);
+Route::resource('fertilisation', FertilisationController::class);
