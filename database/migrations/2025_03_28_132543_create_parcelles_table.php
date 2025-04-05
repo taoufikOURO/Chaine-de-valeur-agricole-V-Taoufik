@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('parcelles', function (Blueprint $table) {
             $table->id();
             $table->string('code')->unique();
-            $table->string('nom')->unique();
+            $table->string('nom');
             $table->float('surface');
             $table->string('adresse');
             $table->foreignId('statut_id')->constrained('statuts')->onDelete('cascade');
