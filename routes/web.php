@@ -27,3 +27,4 @@ Route::resource('semis', SemisController::class);
 Route::resource('recolte', RecolteController::class);
 Route::resource('fertilisation', FertilisationController::class);
 Route::resource('arrosage', ArrosageController::class);
+Route::resource('user', UserController::class);

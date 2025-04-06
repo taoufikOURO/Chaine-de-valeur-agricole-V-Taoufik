@@ -95,11 +95,11 @@
 
                 <div class="section-title">Utilisateurs</div>
 
-                <a href="#" class="nav-item">
+                <a href="{{route('user.index')}}" class="nav-item @if (Route::current()->uri() == "user")  active @endif">
                     <i class="fas fa-users"></i>
                     <span class="nav-text">Liste des utilisateurs</span>
                 </a>
-                <a href="#" class="nav-item">
+                <a href="{{route('user.create')}}" class="nav-item @if (Route::current()->uri() == "user/create")  active @endif">
                     <i class="fa-solid fa-user-plus"></i>
                     <span class="nav-text">Ajouter un utilisateur</span>
                 </a>
