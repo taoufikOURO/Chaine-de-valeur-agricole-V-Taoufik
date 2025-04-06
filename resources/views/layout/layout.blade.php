@@ -31,78 +31,100 @@
 
         <div class="sidebar-content">
             <nav class="mt-6">
-                <a href="{{ route('dashboard') }}" class="nav-item @if (Route::current()->uri() == "dashboard")  active @endif ">
+                <a href="{{ route('dashboard') }}" class="nav-item @if (Route::current()->uri() == 'dashboard') active @endif ">
                     <i class="fas fa-chart-line"></i>
                     <span class="nav-text">Tableau de bord</span>
                 </a>
-                <div class="section-title">Parcelles</div>
-                <a href="{{route('parcelle.index')}}"  class="nav-item @if (Route::current()->uri() == "parcelle")  active @endif ">
-                    <i class="fa-brands fa-buromobelexperte"></i>
-                    <span class="nav-text">Liste des parcelles</span>
-                </a>
-                <a href="{{route('parcelle.create')}}"  class="nav-item @if (Route::current()->uri() == "parcelle/create")  active @endif ">
-                    <i class="fa-solid fa-plus"></i>
-                    <span class="nav-text">Ajouter une parcelle</span>
-                </a>
+                @if (Auth::user()->role->libelle === 'agriculteur')
+                    <div class="section-title">Parcelles</div>
+                    <a href="{{ route('parcelle.index') }}"
+                        class="nav-item @if (Route::current()->uri() == 'parcelle') active @endif ">
+                        <i class="fa-brands fa-buromobelexperte"></i>
+                        <span class="nav-text">Liste des parcelles</span>
+                    </a>
+                    <a href="{{ route('parcelle.create') }}"
+                        class="nav-item @if (Route::current()->uri() == 'parcelle/create') active @endif ">
+                        <i class="fa-solid fa-plus"></i>
+                        <span class="nav-text">Ajouter une parcelle</span>
+                    </a>
+                @endif
 
-                <div class="section-title">Cultures et types de culture</div>
-                <a href="{{route('culture.index')}}" class="nav-item @if (Route::current()->uri() == "culture")  active @endif ">
-                    <i class="fa-solid fa-leaf"></i>
-                    <span class="nav-text">Liste des cultures</span>
-                </a>
-                <a href="{{route('culture.create')}}" class="nav-item @if (Route::current()->uri() == "culture/create")  active @endif">
-                    <i class="fa-solid fa-plus"></i>
-                    <span class="nav-text">Ajouter une culture</span>
-                </a>
-                <a href="{{ route('type-culture.index') }}" class="nav-item @if (Route::current()->uri() == "type-culture")  active @endif">
-                    <i class="fa-solid fa-leaf"></i>
-                    <span class="nav-text">Liste des types de culture</span>
-                </a>
-                <a href="{{ route('type-culture.create') }}" class="nav-item @if (Route::current()->uri() == "type-culture/create")  active @endif">
-                    <i class="fa-solid fa-plus"></i>
-                    <span class="nav-text">Ajouter un type de culture</span>
-                </a>
+                @if (Auth::user()->role->libelle === 'admin')
+                    <div class="section-title">Cultures et types de culture</div>
+                    <a href="{{ route('culture.index') }}"
+                        class="nav-item @if (Route::current()->uri() == 'culture') active @endif ">
+                        <i class="fa-solid fa-leaf"></i>
+                        <span class="nav-text">Liste des cultures</span>
+                    </a>
+                    <a href="{{ route('culture.create') }}"
+                        class="nav-item @if (Route::current()->uri() == 'culture/create') active @endif">
+                        <i class="fa-solid fa-plus"></i>
+                        <span class="nav-text">Ajouter une culture</span>
+                    </a>
+                    <a href="{{ route('type-culture.index') }}"
+                        class="nav-item @if (Route::current()->uri() == 'type-culture') active @endif">
+                        <i class="fa-solid fa-leaf"></i>
+                        <span class="nav-text">Liste des types de culture</span>
+                    </a>
+                    <a href="{{ route('type-culture.create') }}"
+                        class="nav-item @if (Route::current()->uri() == 'type-culture/create') active @endif">
+                        <i class="fa-solid fa-plus"></i>
+                        <span class="nav-text">Ajouter un type de culture</span>
+                    </a>
+                @endif
+                @if (Auth::user()->role->libelle === 'agriculteur')
+                    <div class="section-title">Actions sur parcelles</div>
+                    <a href="{{ route('semis.index') }}"
+                        class="nav-item @if (Route::current()->uri() == 'semis') active @endif">
+                        <i class="fa-solid fa-wheat-awn"></i>
+                        <span class="nav-text">Liste des semis</span>
+                    </a>
+                    <a href="{{ route('semis.create') }}"
+                        class="nav-item @if (Route::current()->uri() == 'semis/create') active @endif">
+                        <i class="fa-solid fa-plus"></i>
+                        <span class="nav-text">Effectuer un semis</span>
+                    </a>
+                    <a href="{{ route('arrosage.create') }}"
+                        class="nav-item @if (Route::current()->uri() == 'arrosage/create') active @endif">
+                        <i class="fa-solid fa-droplet"></i>
+                        <span class="nav-text">Arroser un semis</span>
+                    </a>
+                    <a href="{{ route('recolte.create') }}"
+                        class="nav-item @if (Route::current()->uri() == 'recolte/create') active @endif">
+                        <i class="fa-solid fa-warehouse"></i>
+                        <span class="nav-text">Recolter un semis</span>
+                    </a>
+                    <a href="{{ route('recolte.index') }}"
+                        class="nav-item @if (Route::current()->uri() == 'recolte') active @endif">
+                        <i class="fa-solid fa-list"></i>
+                        <span class="nav-text">Liste des recoltes</span>
+                    </a>
+                    <a href="{{ route('fertilisation.create') }}"
+                        class="nav-item @if (Route::current()->uri() == 'fertilisation/create') active @endif">
+                        <i class="fa-solid fa-poop"></i>
+                        <span class="nav-text">Fertiliser un champ</span>
+                    </a>
+                    <a href="{{ route('fertilisation.index') }}"
+                        class="nav-item @if (Route::current()->uri() == 'fertilisation') active @endif">
+                        <i class="fa-solid fa-list"></i>
+                        <span class="nav-text">Liste des fertilisations</span>
+                    </a>
+                @endif
 
-                <div class="section-title">Actions sur parcelles</div>
-                <a href="{{route('semis.index')}}" class="nav-item @if (Route::current()->uri() == "semis")  active @endif">
-                    <i class="fa-solid fa-wheat-awn"></i>
-                    <span class="nav-text">Liste des semis</span>
-                </a>
-                <a href="{{route('semis.create')}}" class="nav-item @if (Route::current()->uri() == "semis/create")  active @endif">
-                    <i class="fa-solid fa-plus"></i>
-                    <span class="nav-text">Effectuer un semis</span>
-                </a>
-                <a href="{{route('arrosage.create')}}" class="nav-item @if (Route::current()->uri() == "arrosage/create")  active @endif">
-                    <i class="fa-solid fa-droplet"></i>
-                    <span class="nav-text">Arroser un semis</span>
-                </a>
-                <a href="{{route('recolte.create')}}" class="nav-item @if (Route::current()->uri() == "recolte/create")  active @endif">
-                    <i class="fa-solid fa-warehouse"></i>
-                    <span class="nav-text">Recolter un semis</span>
-                </a>
-                <a href="{{route('recolte.index')}}" class="nav-item @if (Route::current()->uri() == "recolte")  active @endif">
-                    <i class="fa-solid fa-list"></i>
-                    <span class="nav-text">Liste des recoltes</span>
-                </a>
-                <a href="{{route('fertilisation.create')}}" class="nav-item @if (Route::current()->uri() == "fertilisation/create")  active @endif">
-                    <i class="fa-solid fa-poop"></i>
-                    <span class="nav-text">Fertiliser un champ</span>
-                </a>
-                <a href="{{route('fertilisation.index')}}" class="nav-item @if (Route::current()->uri() == "fertilisation")  active @endif">
-                    <i class="fa-solid fa-list"></i>
-                    <span class="nav-text">Liste des fertilisations</span>
-                </a>
+                @if (Auth::user()->role->libelle === 'admin')
+                    <div class="section-title">Utilisateurs</div>
 
-                <div class="section-title">Utilisateurs</div>
-
-                <a href="{{route('user.index')}}" class="nav-item @if (Route::current()->uri() == "user")  active @endif">
-                    <i class="fas fa-users"></i>
-                    <span class="nav-text">Liste des utilisateurs</span>
-                </a>
-                <a href="{{route('user.create')}}" class="nav-item @if (Route::current()->uri() == "user/create")  active @endif">
-                    <i class="fa-solid fa-user-plus"></i>
-                    <span class="nav-text">Ajouter un utilisateur</span>
-                </a>
+                    <a href="{{ route('user.index') }}"
+                        class="nav-item @if (Route::current()->uri() == 'user') active @endif">
+                        <i class="fas fa-users"></i>
+                        <span class="nav-text">Liste des utilisateurs</span>
+                    </a>
+                    <a href="{{ route('user.create') }}"
+                        class="nav-item @if (Route::current()->uri() == 'user/create') active @endif">
+                        <i class="fa-solid fa-user-plus"></i>
+                        <span class="nav-text">Ajouter un utilisateur</span>
+                    </a>
+                @endif
             </nav>
         </div>
     </div>
