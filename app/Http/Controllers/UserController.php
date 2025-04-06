@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\RegisterRequest;
 use App\Models\Role;
+use App\Models\Semis;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -13,7 +14,12 @@ class UserController extends Controller
 {
     public function profile()
     {
-        return view('pages.profile');
+        $semis = Semis::where('user_id', Auth::user()->id)
+            ->orderBy('created_at', 'desc')
+            ->get()
+            ->unique('culture_id')
+            ->values();
+        return view('pages.profile', compact('semis'));
     }
     /**
      * Display a listing of the resource.
