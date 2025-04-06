@@ -105,18 +105,20 @@
             </div>
 
             <!-- Colonne de droite avec informations -->
-            <div class="md:col-span-2">
-                <div class="section-divider mb-8"></div>
-                <div class="section-divider mb-8"></div>
-                <!-- Section de culture -->
-                <h2 class="text-xl font-semibold text-gray-800 mb-5">Principales cultures</h2>
-                <div class="flex flex-wrap gap-2">
-                    @foreach ($semis as $item)
-                        <span
-                            class="px-3 py-1 bg-agri-green-100 text-agri-green-700 rounded-full text-sm">{{ $item->culture->nom }}</span>
-                    @endforeach
+            @if (Auth::user()->role_id == 2)
+                <div class="md:col-span-2">
+                    <div class="section-divider mb-8"></div>
+                    <div class="section-divider mb-8"></div>
+                    <!-- Section de culture -->
+                    <h2 class="text-xl font-semibold text-gray-800 mb-5">Principales cultures</h2>
+                    <div class="flex flex-wrap gap-2">
+                        @foreach ($semis as $item)
+                            <span
+                                class="px-3 py-1 bg-agri-green-100 text-agri-green-700 rounded-full text-sm">{{ $item->culture->nom }}</span>
+                        @endforeach
+                    </div>
                 </div>
-            </div>
+            @endif
         </div>
     </body>
 
