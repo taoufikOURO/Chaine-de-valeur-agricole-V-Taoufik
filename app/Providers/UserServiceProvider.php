@@ -29,7 +29,7 @@ class UserServiceProvider extends ServiceProvider
         $users = [
             [
                 'username' => 'admin',
-                'email' => 'admin@gmail.com',
+                'email' => 'xiyim14198@exclussi.com',
                 'phone_number' => '0123456789',
                 'first_name' => 'Admin',
                 'last_name' => 'User',

@@ -7,6 +7,7 @@ use App\Models\Role;
 use App\Models\Semis;
 use App\Models\User;
 use Exception;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -46,7 +47,10 @@ class UserController extends Controller
     {
         $fields = $request->all();
         try {
-            User::create($fields);
+            $user = User::create($fields);
+            
+            event(new Registered($user));
+
             return redirect()->route('user.index')->with([
                 'showSuccessModal' => true,
                 'successTitle' => 'Opération réussie',

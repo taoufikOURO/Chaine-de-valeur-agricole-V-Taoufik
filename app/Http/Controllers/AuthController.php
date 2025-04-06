@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AuthRequest;
 use App\Models\User;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         return view("welcome");
     }
     public function loginPage()
@@ -38,6 +40,20 @@ class AuthController extends Controller
             ]);
         }
     }
+
+    public function verifyNotice()
+    {
+        return view('pages.verify-email');
+    }
+    public function verifyEmail (EmailVerificationRequest $request) {
+        $request->fulfill();
+        return redirect()->route('dashboard');
+    }
+    public function verifyHandler (Request $request) {
+        $request->user()->sendEmailVerificationNotification();
+        return back()->with('message', 'Verification link sent!');
+    }
+
     public function logout(Request $request)
     {
         Auth::logout();

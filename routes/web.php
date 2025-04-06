@@ -10,6 +10,7 @@ use App\Http\Controllers\SemisController;
 use App\Http\Controllers\TypeCultureController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\CheckRole;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
 
 
@@ -24,11 +25,14 @@ Route::middleware('guest')->group(
 Route::middleware('auth')->group(
     function () {
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-        Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
-        Route::get('/profile', [UserController::class, 'profile'])->name('profile');
+        Route::get('/dashboard', [AuthController::class, 'dashboard'])->middleware('verified')->name('dashboard');
+        Route::get('/profile', [UserController::class, 'profile'])->middleware('verified')->name('profile');
+        Route::get('/email/verify', [AuthController::class, 'verifyNotice'])->name('verification.notice');
+        Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verifyEmail'])->middleware('signed')->name('verification.verify');
+        Route::post('/email/verification-notification', [AuthController::class, 'verifyHandler'])->middleware('throttle:6,1')->name('verification.send');
     }
 );
-Route::middleware(['auth', CheckRole::class.':admin'])->group(
+Route::middleware(['auth', CheckRole::class.':admin', 'verified'])->group(
     function () {
         Route::resource('culture', CultureController::class);
         Route::resource('type-culture', TypeCultureController::class);
@@ -36,7 +40,7 @@ Route::middleware(['auth', CheckRole::class.':admin'])->group(
     }
 );
 
-Route::middleware(['auth', CheckRole::class.':agriculteur'])->group(
+Route::middleware(['auth', CheckRole::class.':agriculteur', 'verified'])->group(
     function () {
         Route::resource('parcelle', ParcelleController::class);
         Route::resource('semis', SemisController::class);
