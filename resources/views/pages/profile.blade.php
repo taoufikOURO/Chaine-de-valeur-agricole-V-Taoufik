@@ -11,6 +11,9 @@
 
 
     <body class="min-h-screen flex items-center justify-center p-4 sm:p-6 md:p-8">
+        @if (session('showSuccessModal'))
+            @include('components.success-modal')
+        @endif
         <!-- Motifs décoratifs -->
         <div class="absolute inset-0 subtle-pattern opacity-40"></div>
 

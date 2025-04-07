@@ -9,13 +9,15 @@
     --agri-brown-500: #8d6e63;
     --agri-brown-100: #f0eae4;
 
-    --agri-red-500: #CF4A4A;
+    --agri-red-500: #cf4a4a;
+    --agri-blue-500: #4a7bcf;
 }
 
 body {
     font-family: "SF Pro Display", "SF Pro Text", "Inter", -apple-system,
         BlinkMacSystemFont, sans-serif;
     background-color: #fafafa;
+
     color: #333;
     overflow-x: hidden;
 }
@@ -340,9 +342,14 @@ body {
     color: var(--agri-green-500);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
-#logout-button:hover{
+#logout-button:hover {
     border-color: var(--agri-red-500);
     color: var(--agri-red-500);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+#edit-profile-button:hover {
+    border-color: var(--agri-blue-500);
+    color: var(--agri-blue-500);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 

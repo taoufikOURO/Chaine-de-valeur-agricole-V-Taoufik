@@ -53,7 +53,7 @@
                     <div class="section-title">Cultures et types de culture</div>
                     <a href="{{ route('culture.index') }}"
                         class="nav-item @if (Route::current()->uri() == 'culture') active @endif ">
-                        <i class="fa-solid fa-leaf"></i>
+                        <i class="fa-solid fa-seedling"></i>
                         <span class="nav-text">Liste des cultures</span>
                     </a>
                     <a href="{{ route('culture.create') }}"
@@ -146,9 +146,14 @@
                     </button>
 
                     <div class="dropdown-content" id="profile-dropdown">
-                        <a class="dropdown-item" href="{{ route('profile') }}">
+                        <a class="dropdown-item" href="{{ route('profile.index') }}">
                             <i class="fas fa-user-circle"></i>
                             <span>Mon profil</span>
+                        </a>
+                        <a class="dropdown-item" href="{{ route('profile.edit', Auth::user()->id) }}"
+                            id="edit-profile-button">
+                            <i class="fas fa-pen-to-square"></i>
+                            <span>Editer le profil</span>
                         </a>
                         <div class="dropdown-divider"></div>
                         <div class="dropdown-divider"></div>

@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CultureController;
 use App\Http\Controllers\FertilisationController;
 use App\Http\Controllers\ParcelleController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RecolteController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\SemisController;
@@ -32,7 +33,7 @@ Route::middleware('auth')->group(
     function () {
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
         Route::get('/dashboard', [AuthController::class, 'dashboard'])->middleware('verified')->name('dashboard');
-        Route::get('/profile', [UserController::class, 'profile'])->middleware('verified')->name('profile');
+        Route::resource('profile', ProfileController::class)->middleware('verified');
         Route::get('/email/verify', [AuthController::class, 'verifyNotice'])->name('verification.notice');
         Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verifyEmail'])->middleware('signed')->name('verification.verify');
         Route::post('/email/verification-notification', [AuthController::class, 'verifyHandler'])->middleware('throttle:6,1')->name('verification.send');
