@@ -12,9 +12,6 @@ use Illuminate\Support\Str;
 
 class ParcelleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         #recupérer selon un id
@@ -22,18 +19,12 @@ class ParcelleController extends Controller
         return view('pages.parcelle.index', compact('parcelles'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $statuts = Statut::all();
         return view('pages.parcelle.create', compact('statuts'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $fields = $request->validate(
@@ -76,17 +67,6 @@ class ParcelleController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         $parcelle = Parcelle::findOrFail($id);
@@ -97,9 +77,6 @@ class ParcelleController extends Controller
         );
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         $fields = $request->validate([
@@ -132,9 +109,6 @@ class ParcelleController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         $parcelle = Parcelle::findOrFail($id);

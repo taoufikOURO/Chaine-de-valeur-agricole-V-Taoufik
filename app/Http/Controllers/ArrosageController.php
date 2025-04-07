@@ -10,17 +10,6 @@ use Illuminate\Support\Facades\Auth;
 
 class ArrosageController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $semis = Semis::where('user_id', Auth::user()->id)
@@ -28,10 +17,7 @@ class ArrosageController extends Controller
             ->get();
         return view('pages.arrosage.create', compact('semis'));
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
+    
     public function store(Request $request)
     {
         $fields = $request->validate(
@@ -54,40 +40,8 @@ class ArrosageController extends Controller
             return back()->with([
                 'showErrorModal' => true,
                 'errorTitle' => 'Erreur lors de l\'enrégistrement',
-                'errorMessage' => /* 'Votre semis n\'a pas pu être arrosé. Veuillez réssayer'+ */ $e->getMessage(),
+                'errorMessage' => 'Votre semis n\'a pas pu être arrosé. Veuillez réssayer',
             ]);
         }
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }

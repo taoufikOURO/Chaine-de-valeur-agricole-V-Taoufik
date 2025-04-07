@@ -9,9 +9,6 @@ use Illuminate\Support\Str;
 
 class TypeCultureController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $typeCultures = TypeCulture::all();
@@ -21,17 +18,11 @@ class TypeCultureController extends Controller
         );
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('pages.type-culture.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $fields = $request->validate(
@@ -63,23 +54,12 @@ class TypeCultureController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id) {}
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         $typeCulture = TypeCulture::findOrFail($id);
         return view('pages.type-culture.edit', compact('typeCulture'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         $fields = $request->validate([
@@ -105,9 +85,6 @@ class TypeCultureController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         $typeCulture = TypeCulture::findOrFail($id);
