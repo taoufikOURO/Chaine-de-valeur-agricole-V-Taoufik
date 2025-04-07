@@ -48,7 +48,7 @@ class UserController extends Controller
         $fields = $request->all();
         try {
             $user = User::create($fields);
-            
+
             event(new Registered($user));
 
             return redirect()->route('user.index')->with([

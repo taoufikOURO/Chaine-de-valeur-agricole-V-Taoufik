@@ -38,7 +38,7 @@ class UserServiceProvider extends ServiceProvider
             ],
             [
                 'username' => 'agriculteur',
-                'email' => 'agriculteur@gmail.com',
+                'email' => 'gear2mugiwara@gmail.com',
                 'phone_number' => '0987654321',
                 'first_name' => 'John',
                 'last_name' => 'Doe',
