@@ -22,21 +22,30 @@ class AuthController extends Controller
     {
         $data = $request->all();
         $user = User::where('email', $data['email'])->first();
-        if ($user->active) {
-            if (Auth::attempt(['email' => $data['email'], 'password' => $data['password']])) {
-                return redirect(route('dashboard'));
+        if($user){
+
+            if ($user->active) {
+                if (Auth::attempt(['email' => $data['email'], 'password' => $data['password']])) {
+                    return redirect(route('dashboard'));
+                } else {
+                    return back()->with([
+                        'showErrorModal' => true,
+                        'errorTitle' => 'Erreur de connexion',
+                        'errorMessage' => 'Vérifiez votre adresse email et votre mot de passe puis réessayer'
+                    ]);
+                }
             } else {
                 return back()->with([
                     'showErrorModal' => true,
                     'errorTitle' => 'Erreur de connexion',
-                    'errorMessage' => 'Vérifiez votre adresse email et votre mot de passe puis réessayer'
+                    'errorMessage' => 'Votre compte est désactivé, contactez l\'administrateur.'
                 ]);
             }
-        } else {
+        }else{
             return back()->with([
                 'showErrorModal' => true,
                 'errorTitle' => 'Erreur de connexion',
-                'errorMessage' => 'Votre compte est désactivé, contactez l\'administrateur.'
+                'errorMessage' => 'Veuillez vérifier votre adresse email ainsi que votre mot de passe puis réessayer.',
             ]);
         }
     }
@@ -60,9 +69,5 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return  redirect()->route('login.page');
-    }
-    public function dashboard()
-    {
-        return view('pages.dashboard');
     }
 }
