@@ -31,10 +31,25 @@
 
         <div class="sidebar-content">
             <nav class="mt-6">
+                <div class="section-title">Analyses</div>
                 <a href="{{ route('dashboard') }}" class="nav-item @if (Route::current()->uri() == 'dashboard') active @endif ">
                     <i class="fas fa-chart-line"></i>
                     <span class="nav-text">Tableau de bord</span>
                 </a>
+                <a href="{{ route('charts') }}" class="nav-item @if (Route::current()->uri() == 'dashboard/charts') active @endif ">
+                    <i class="fas fa-chart-simple"></i>
+                    <span class="nav-text">Graphes</span>
+                </a>
+                @if (Auth::user()->role->libelle === 'agriculteur')
+                    <a href="{{ route('semisNonArroses') }}"
+                        class="nav-item flex items-center justify-between gap-2 @if (Route::currentRouteName() == 'semisNonArroses') active @endif">
+
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-sun-plant-wilt"></i>
+                            <span class="nav-text">Semis non arrosés</span>
+                        </div>
+                    </a>
+                @endif
                 @if (Auth::user()->role->libelle === 'agriculteur')
                     <div class="section-title">Parcelles</div>
                     <a href="{{ route('parcelle.index') }}"
