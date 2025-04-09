@@ -62,7 +62,7 @@
                                 <td>{{ $item->culture->nom }} | <span
                                         class="text-green-500">{{ $item->culture->typeCulture->libelle }}</span> </td>
                                 <td>{{ $item->parcelle->nom }} <span class="text-green-500">|</span>
-                                    {{ $item->parcelle->surface }} m²</td>
+                                    {{ $item->parcelle->surface }} hectares</td>
                                 <td>
                                     {{ $item->arrosage_count }}
                                 </td>

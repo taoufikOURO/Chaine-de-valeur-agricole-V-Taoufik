@@ -67,7 +67,7 @@
                             <tr class="transition-all duration-300 ease-in-out">
                                 <td>{{ $fertilisation->date_fertilisation }}</td>
                                 <td>{{ $fertilisation->parcelle->nom }} <span class="text-green-400">|</span>
-                                    {{ $fertilisation->parcelle->surface }} m2 </td>
+                                    {{ $fertilisation->parcelle->surface }} hectares </td>
                                 <td>{{ $fertilisation->description }}</td>
                             </tr>
                         @endforeach

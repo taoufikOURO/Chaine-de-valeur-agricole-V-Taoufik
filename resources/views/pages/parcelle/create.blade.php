@@ -100,7 +100,7 @@
                             </div>
                             <input type="number" required name="surface" required
                                 class="w-full pl-10 pr-4 py-3.5 rounded-xl border-0 ring-1 ring-gray-200 focus:ring-2 focus:border bg-transparent transition duration-200"
-                                placeholder="Donner la surface de la parcelle en m²">
+                                placeholder="Donner la surface de la parcelle en hectare">
                         </div>
                         @error('adresse')
                             <span id="nom-error" class="text-red-500 text-xs mb-5">

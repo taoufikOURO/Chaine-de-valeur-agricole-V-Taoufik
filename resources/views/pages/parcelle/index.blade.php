@@ -79,7 +79,7 @@
                         @foreach ($parcelles as $parcelle)
                             <tr class="transition-all duration-300 ease-in-out">
                                 <td>{{ $parcelle->nom }}</td>
-                                <td>{{ $parcelle->surface }} m²</td>
+                                <td>{{ $parcelle->surface }} hectares</td>
                                 <td>{{ $parcelle->adresse }}</td>
                                 <td>
                                     @if ($parcelle->statut->libelle == 'en_culture')

@@ -84,7 +84,7 @@
                                 class="w-full pl-10 pr-4 py-3.5 rounded-xl border-0 ring-1 ring-gray-200 focus:ring-2 focus:border bg-transparent transition duration-200">
                                 <option value="" disabled selected> Veuillez sélectionner la parcelle </option>
                                 @foreach ($parcelles as $parcelle)
-                                    <option value="{{ $parcelle->id }}">{{ $parcelle->nom }} | {{$parcelle->surface}}m²</option>
+                                    <option value="{{ $parcelle->id }}">{{ $parcelle->nom }} | {{$parcelle->surface}} hectares</option>
                                 @endforeach
                             </select>
                         </div>

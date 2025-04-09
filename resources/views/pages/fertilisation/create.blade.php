@@ -77,10 +77,10 @@
                             <select type="text" name="parcelle_id" required
                                 class="w-full pl-10 pr-4 py-3.5 rounded-xl border-0 ring-1 ring-gray-200 focus:ring-2 focus:border bg-transparent transition duration-200">
                                 <option value="" disabled selected> Veuillez sélectionnez votre parcelle a fertiliser
-                                </option>   
+                                </option>
                                 @foreach ($parcelles as $parcelle)
                                     <option value="{{ $parcelle->id }}">
-                                        {{ $parcelle->nom }} | {{ $parcelle->surface }}m²
+                                        {{ $parcelle->nom }} | {{ $parcelle->surface }} hectares
                                     </option>
                                 @endforeach
                             </select>

@@ -72,7 +72,7 @@
                                 <td>{{ $recolte->date_recolte}}</td>
                                 <td>{{ $recolte->semis->culture->nom }}</td>
                                 <td>{{ $recolte->quantite_recolte }} T</td>
-                                <td>{{ $recolte->parcelle->nom }} | {{ $recolte->parcelle->surface }}m²</td>
+                                <td>{{ $recolte->parcelle->nom }} | {{ $recolte->parcelle->surface }} hectares</td>
                             </tr>
                         @endforeach
                     </tbody>
