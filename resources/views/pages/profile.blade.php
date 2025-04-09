@@ -104,6 +104,13 @@
                             </div>
                         </div>
                     @endif
+                    <a class="badge flex items-center px-5 py-3 rounded-xl bg-indigo-500 text-white shadow-badge cursor-pointer"
+                        href="{{ route('profile.edit', Auth::user()->id) }}">
+                        <div>
+                            <div class="text-sm opacity-70">Modifier</div>
+                            <div class="font-semibold">Les infomations du profil</div>
+                        </div>
+                    </a>
                 </div>
             </div>
 
