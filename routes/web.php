@@ -57,5 +57,6 @@ Route::middleware(['auth', CheckRole::class . ':agriculteur', 'verified'])->grou
         Route::resource('fertilisation', FertilisationController::class);
         Route::resource('arrosage', ArrosageController::class);
         Route::get('dashboard/semis', [StatisticsController::class, 'semisNonArroses'])->name('semisNonArroses');
+        Route::get('historique/semis', [SemisController::class, 'historique'])->name('historique.semis');
     }
 );

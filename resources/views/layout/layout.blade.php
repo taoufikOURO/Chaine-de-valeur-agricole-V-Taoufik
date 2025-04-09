@@ -140,6 +140,14 @@
                         <span class="nav-text">Ajouter un utilisateur</span>
                     </a>
                 @endif
+                @if (Auth::user()->role->libelle === 'agriculteur')
+                    <div class="section-title">Historique</div>
+                    <a href="{{ route('historique.semis') }}"
+                        class="nav-item @if (Route::current()->uri() == 'historique/semis') active @endif">
+                        <i class="fa-solid fa-wheat-awn"></i>
+                        <span class="nav-text">Historique des semis</span>
+                    </a>
+                @endif
             </nav>
         </div>
     </div>

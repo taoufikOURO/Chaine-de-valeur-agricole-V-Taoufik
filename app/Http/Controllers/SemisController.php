@@ -21,6 +21,13 @@ class SemisController extends Controller
 
         return view('pages.semis.index', compact('semis'));
     }
+    public function historique(){
+        $semis = Semis::where("user_id", Auth::user()->id)
+        ->whereNot('recolte_id', null)
+        ->withCount('arrosage')
+        ->get();
+        return view('pages.semis.historique', compact('semis'));
+    }
 
     public function create()
     {
