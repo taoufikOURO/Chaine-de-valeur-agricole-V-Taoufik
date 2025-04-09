@@ -160,12 +160,9 @@
 
                 <div class="dropdown-wrapper">
                     <button class="flex items-center gap-2 cursor-pointer" id="profile-btn">
-                        <div class="w-9 h-9 rounded-full bg-agri-green-100 flex items-center justify-center">
-                            <i class="fas fa-user text-agri-green-500"></i>
-                        </div>
-                        <span class="text-sm font-medium hidden md:block">{{ Auth::user()->first_name }}
-                            {{ Auth::user()->last_name }}</span>
-                        <i class="fas fa-chevron-down text-xs text-gray-500 hidden md:block"></i>
+                        <h1 class="text-sm font-extrabold text-gray-900 tracking-tight mb-6 flex items-center gap-4 md:block">
+                            <span class="border-l-4 border-green-500 pl-4">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</span>
+                        </h1>
                     </button>
 
                     <div class="dropdown-content" id="profile-dropdown">
