@@ -19,9 +19,9 @@
             <div class="mb-8 flex justify-between items-center">
                 <div>
                     <h1 class="text-4xl font-bold text-gray-900 mb-2 flex items-center">
-                        Liste des semis
+                        Liste des semis non arrosés
                     </h1>
-                    <p class="text-emerald-600 font-medium ml-16">visualiser tout mes semis non recoltés sur ma parcelle</p>
+                    <p class="text-emerald-600 font-medium ml-16">visualiser tout mes semis non arrosés sur ma parcelle</p>
                 </div>
             </div>
 
