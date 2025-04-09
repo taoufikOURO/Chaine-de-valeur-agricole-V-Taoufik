@@ -15,7 +15,9 @@ class ParcelleController extends Controller
     public function index()
     {
         #recupérer selon un id
-        $parcelles = Parcelle::where('user_id', Auth::user()->id)->get();
+        $parcelles = Parcelle::where('user_id', Auth::user()->id)
+        ->withCount('fertilisation')
+        ->get();
         return view('pages.parcelle.index', compact('parcelles'));
     }
 
