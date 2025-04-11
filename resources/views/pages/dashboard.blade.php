@@ -297,7 +297,7 @@
                     <div class="bg-red-50 rounded-lg p-3 border-l-4 border-red-500">
                         <a class="flex items-center" href="{{ route('semisNonArroses') }}">
                             <div class="rounded-full bg-red-100 p-2 mr-3">
-                                <i class="fas fa-exclamation-triangle text-red-500"></i>
+                                <i class="fas fa-droplet text-red-500"></i>
                             </div>
                             <div>
                                 <h4 class="font-medium text-red-800">Alerte arrosage</h4>
@@ -312,11 +312,11 @@
                     <div class="bg-red-50 rounded-lg p-3 border-l-4 border-red-500">
                         <a class="flex items-center" href="{{ route('parcelle.index') }}">
                             <div class="rounded-full bg-red-100 p-2 mr-3">
-                                <i class="fas fa-exclamation-triangle text-red-500"></i>
+                                <i class="fas fa-poop text-red-500"></i>
                             </div>
                             <div>
                                 <h4 class="font-medium text-red-800">Alerte fertilisation</h4>
-                                <p class="text-sm text-red-600">Vous avez {{$stats['fertilisation']['parcellesSansFertilisationRecente']}} parcelle(s) dont la
+                                <p class="text-sm text-red-600">Vous avez {{ $stats['fertilisation']['parcellesSansFertilisationRecente'] }} parcelle(s) dont la
                                     dernière fertilisation remonte a 6 mois: </p>
                             </div>
                         </a>
@@ -328,7 +328,7 @@
                     <div class="bg-amber-50 rounded-lg p-3 border-l-4 border-amber-500">
                         <a class="flex items-center" href="{{ route('parcelle.index') }}">
                             <div class="rounded-full bg-amber-100 p-2 mr-3">
-                                <i class="fas fa-exclamation-triangle text-amber-500"></i>
+                                <i class="fas fa-map-marked-alt text-amber-500"></i>
                             </div>
                             <div>
                                 <h4 class="font-medium text-amber-800">Alerte parcelles</h4>
