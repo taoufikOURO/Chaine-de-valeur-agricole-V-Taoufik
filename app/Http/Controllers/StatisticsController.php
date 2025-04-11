@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Culture;
+use App\Models\Fertilisation;
 use App\Models\Parcelle;
 use App\Models\Semis;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -71,6 +73,16 @@ class StatisticsController extends Controller
             ->having('arrosage_count', '=', 0)
             ->get();
 
+        /* Fertilisation */
+        $cutoffDate = Carbon::now()->subMonths(6);
+        $recentlyFertilizedParcelIds = Fertilisation::where('created_at', '>=', $cutoffDate)
+            ->pluck('parcelle_id')
+            ->unique()
+            ->toArray();
+
+        $parcellesWithoutRecentFertilisation = Parcelle::whereNotIn('id', $recentlyFertilizedParcelIds)
+            ->count();
+
         $stats = [
             'users' => [
                 'total' => $totalUsers,
@@ -90,8 +102,11 @@ class StatisticsController extends Controller
             'cultures' => [
                 'total' => $numberOfCrops,
             ],
-            'semis' =>[
+            'semis' => [
                 "nonArroses" => $semisnonArroses->count(),
+            ],
+            'fertilisation' => [
+                'parcellesSansFertilisationRecente' => $parcellesWithoutRecentFertilisation,
             ],
             'parcelles' => [
                 'total' => $numberOfPlots,

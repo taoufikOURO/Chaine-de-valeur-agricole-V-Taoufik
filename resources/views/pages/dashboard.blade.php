@@ -307,6 +307,22 @@
                     </div>
                 </div>
             @endif
+            @if ($stats['fertilisation']['parcellesSansFertilisationRecente'])
+                <div>
+                    <div class="bg-red-50 rounded-lg p-3 border-l-4 border-red-500">
+                        <a class="flex items-center" href="{{ route('parcelle.index') }}">
+                            <div class="rounded-full bg-red-100 p-2 mr-3">
+                                <i class="fas fa-exclamation-triangle text-red-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-red-800">Alerte fertilisation</h4>
+                                <p class="text-sm text-red-600">Vous avez {{$stats['fertilisation']['parcellesSansFertilisationRecente']}} parcelle(s) dont la
+                                    dernière fertilisation remonte a 6 mois: </p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            @endif
             @if ($stats['parcelleAgriculteur']['fallow']['total'] == 0 && Auth::user()->role->libelle === 'agriculteur')
                 <div class="mt-2">
                     <div class="bg-amber-50 rounded-lg p-3 border-l-4 border-amber-500">
