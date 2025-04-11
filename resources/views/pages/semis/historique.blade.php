@@ -48,9 +48,11 @@
                     <thead class="bg-emerald-600">
                         <tr>
                             <th class="w-1/6">Date</th>
-                            <th class="w-2/6">Culture</th>
-                            <th class="w-2/6">Parcelle</th>
+                            <th class="w-1/6">Culture</th>
+                            <th class="w-1/6">Parcelle</th>
                             <th class="w-1/6">Nombre d'arrosage</th>
+                            <th class="w-1/6">Date récolte</th>
+                            <th class="w-1/6">Quantité récoltée</th>
                         </tr>
                     </thead>
                     <tbody id="tableBody">
@@ -65,6 +67,12 @@
                                     {{ $item->parcelle->surface }} hectares</td>
                                 <td>
                                     {{ $item->arrosage_count }}
+                                </td>
+                                <td>
+                                    {{ $item->recolte->date_recolte }}
+                                </td>
+                                <td>
+                                    {{ $item->recolte->quantite_recolte }}T
                                 </td>
                             </tr>
                         @endforeach
