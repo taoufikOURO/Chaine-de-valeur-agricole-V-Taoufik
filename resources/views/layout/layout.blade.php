@@ -23,10 +23,12 @@
 
     <div class="sidebar shadow-sm" id="sidebar">
         <div class="logo-container">
-            <div id="toggle-btn" data-tooltip="Réduire le menu" class=" cursor-pointer">
+            <div id="toggle-btn" data-tooltip="Réduire le menu" class="cursor-pointer">
                 @include('components.logo')
             </div>
-            <span class="logo-text">MON APPLI</span>
+            <h1 class="logo-text text-3xl font-extrabold text-gray-900 tracking-tight flex items-center gap-4 md:block">
+                Mon Appli
+            </h1>
         </div>
 
         <div class="sidebar-content">
