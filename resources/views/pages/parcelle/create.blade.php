@@ -88,7 +88,7 @@
                                     parcelle </option>
                                 @foreach ($statuts as $statut)
                                     @unless (in_array($statut->libelle, ['en_culture', 'recoltee']))
-                                        <option value="{{ $statut->id }}">En Jachère</option>
+                                        <option value="{{ $statut->id }}" selected>En Jachère</option>
                                     @endunless
                                 @endforeach
                             </select>
@@ -98,7 +98,8 @@
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                 <i class="fas fa-layer-group mr-2 text-gray-400"></i>
                             </div>
-                            <input type="number" required name="surface" required
+                            <input type="number" required name="surface" required min="0.01" max="100"
+                                step="0.01"
                                 class="w-full pl-10 pr-4 py-3.5 rounded-xl border-0 ring-1 ring-gray-200 focus:ring-2 focus:border bg-transparent transition duration-200"
                                 placeholder="Donner la surface de la parcelle en hectare">
                         </div>
