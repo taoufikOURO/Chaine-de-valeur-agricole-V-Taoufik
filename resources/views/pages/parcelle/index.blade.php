@@ -4,6 +4,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{{ asset('css/type-culture/index.css') }}">
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
 @section('content')
     @if (session('showSuccessModal'))
@@ -80,14 +81,14 @@
                             <tr class="transition-all duration-300 ease-in-out">
                                 <td>{{ $parcelle->surface }} hectares</td>
                                 <td>{{ $parcelle->nom }}</td>
-                                <td>{{ $parcelle->adresse }}</td>
+                                <td class="adresse" data-nom="{{ $parcelle->adresse }}">{{ $parcelle->adresse }}</td>
                                 <td>
                                     @if ($parcelle->statut->libelle == 'en_culture')
-                                    @include('components.statuts.en-culture')
+                                        @include('components.statuts.en-culture')
                                     @elseif ($parcelle->statut->libelle == 'recoltee')
-                                    @include('components.statuts.recoltee')
+                                        @include('components.statuts.recoltee')
                                     @elseif ($parcelle->statut->libelle == 'en_jachere')
-                                    @include('components.statuts.en-jachere')
+                                        @include('components.statuts.en-jachere')
                                     @endif
                                 </td>
                                 <td>{{ $parcelle->fertilisation_count }}</td>
@@ -145,6 +146,7 @@
                     </tbody>
                 </table>
             </div>
+            <div id="map" class="mt-10 rounded-5" style="height: 500px; width: 800px;"></div>
 
             <!-- État vide (s'affiche lorsqu'aucun résultat ne correspond à la recherche) -->
             <div id="emptyState" class="empty-state mt-6">
@@ -159,17 +161,50 @@
 
             <!-- Information sur le nombre de résultats -->
             <div class="mt-5 text-sm text-gray-600 flex justify-between items-center">
-                {{$parcelles->links('pagination::tailwind')}}
+                {{ $parcelles->links('pagination::tailwind') }}
             </div>
         </div>
-        <script src="{{ asset('js/type-culture/index.js') }}"></script>
-
         @include('components.confirmation-modal', [
             'title' => 'Confirmer la suppression',
             'message' => 'Êtes-vous sûr de vouloir supprimer cet élément ?',
             'confirmText' => 'Supprimer',
             'cancelText' => 'Annuler',
         ])
+        <script src="{{ asset('js/type-culture/index.js') }}"></script>
+        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+        <script>
+            // 1️⃣ Initialisation de la carte (ça, tu le gardes)
+            var map = L.map('map').setView([6.13, 1.21], 7);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; OpenStreetMap contributors'
+            }).addTo(map);
+
+            // 2️⃣ Ajout des marqueurs à partir des adresses (ça, tu AJOUTES en dessous)
+            document.querySelectorAll('.adresse').forEach(function(el, index) {
+                const adresse = el.dataset.nom;
+
+                setTimeout(() => {
+                    fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${adresse}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.length > 0) {
+                                const lat = data[0].lat;
+                                const lon = data[0].lon;
+
+                                L.marker([lat, lon])
+                                    .addTo(map)
+                                    .bindPopup(`<strong>${adresse}</strong>`);
+                            } else {
+                                console.warn(`Adresse non trouvée : ${adresse}`);
+                            }
+                        })
+                        .catch(error => {
+                            console.error(`Erreur pour ${adresse}`, error);
+                        });
+                }, index * 1200); // 1,2 secondes entre chaque requête
+            });
+        </script>
+
 
         <script>
             document.addEventListener('DOMContentLoaded', function() {
