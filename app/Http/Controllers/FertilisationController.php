@@ -14,7 +14,7 @@ class FertilisationController extends Controller
     {
         $fertilisations = Fertilisation::where('user_id', Auth::user()->id)
         ->orderByDesc('created_at')
-        ->get();
+        ->paginate(10);
         return view('pages.fertilisation.index', compact('fertilisations'));
     }
 

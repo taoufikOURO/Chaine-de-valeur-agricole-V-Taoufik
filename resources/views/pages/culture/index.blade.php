@@ -138,9 +138,9 @@
                 <p class="text-gray-500">Aucune donnée ne correspond à votre recherche.</p>
             </div>
 
-            <!-- Information sur le nombre de résultats -->
+
             <div class="mt-5 text-sm text-gray-600 flex justify-between items-center">
-                <p id="resultCount" class="font-medium">Affichage de 0 entrées</p>
+                {{$cultures->links('pagination::tailwind')}}
             </div>
         </div>
         <script src="{{ asset('js/type-culture/index.js') }}"></script>

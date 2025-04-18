@@ -67,8 +67,8 @@
                 <table class="data-table">
                     <thead class="bg-emerald-600">
                         <tr>
-                            <th class="w-1/6">Nom</th>
                             <th class="w-1/6">Surface</th>
+                            <th class="w-1/6">Nom</th>
                             <th class="w-1/6">Adresse</th>
                             <th class="w-2/6">Statut</th>
                             <th class="w-1/6">Nombre de fertilisation</th>
@@ -78,8 +78,8 @@
                     <tbody id="tableBody">
                         @foreach ($parcelles as $parcelle)
                             <tr class="transition-all duration-300 ease-in-out">
-                                <td>{{ $parcelle->nom }}</td>
                                 <td>{{ $parcelle->surface }} hectares</td>
+                                <td>{{ $parcelle->nom }}</td>
                                 <td>{{ $parcelle->adresse }}</td>
                                 <td>
                                     @if ($parcelle->statut->libelle == 'en_culture')
@@ -159,7 +159,7 @@
 
             <!-- Information sur le nombre de résultats -->
             <div class="mt-5 text-sm text-gray-600 flex justify-between items-center">
-                <p id="resultCount" class="font-medium">Affichage de 0 entrées</p>
+                {{$parcelles->links('pagination::tailwind')}}
             </div>
         </div>
         <script src="{{ asset('js/type-culture/index.js') }}"></script>

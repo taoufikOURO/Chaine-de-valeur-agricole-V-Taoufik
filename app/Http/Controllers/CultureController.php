@@ -13,7 +13,8 @@ class CultureController extends Controller
 {
     public function index()
     {
-        $cultures = Culture::orderByDesc('created_at')->get();
+        $cultures = Culture::orderByDesc('created_at')
+            ->paginate(10);
         return view(
             'pages.culture.index',
             compact('cultures')

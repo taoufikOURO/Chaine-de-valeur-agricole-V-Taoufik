@@ -18,7 +18,7 @@ class SemisController extends Controller
             ->where('recolte_id', null)
             ->orderByDesc('created_at')
             ->withCount('arrosage')
-            ->get();
+            ->paginate(10);
 
         return view('pages.semis.index', compact('semis'));
     }
@@ -28,7 +28,7 @@ class SemisController extends Controller
             ->whereNot('recolte_id', null)
             ->orderByDesc('created_at')
             ->withCount('arrosage')
-            ->get();
+            ->paginate(10);
         return view('pages.semis.historique', compact('semis'));
     }
 

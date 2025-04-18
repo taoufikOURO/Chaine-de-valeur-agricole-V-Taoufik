@@ -19,7 +19,7 @@ class ParcelleController extends Controller
         $parcelles = Parcelle::where('user_id', Auth::user()->id)
             ->orderByDesc('created_at')
             ->withCount('fertilisation')
-            ->get();
+            ->paginate(10);
         return view('pages.parcelle.index', compact('parcelles'));
     }
 

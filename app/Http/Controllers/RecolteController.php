@@ -11,7 +11,9 @@ use Illuminate\Support\Facades\Auth;
 class RecolteController extends Controller
 {
     public function index() {
-        $recoltes = Recolte::where('user_id',Auth::user()->id)->orderByDesc('created_at')->get();
+        $recoltes = Recolte::where('user_id',Auth::user()->id)
+        ->orderByDesc('created_at')
+        ->paginate(10);
         return view('pages.recolte.index', compact('recoltes'));
     }
 
