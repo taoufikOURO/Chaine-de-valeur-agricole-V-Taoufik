@@ -16,7 +16,7 @@ class UserController extends Controller
     public function profile()
     {
         $semis = Semis::where('user_id', Auth::user()->id)
-            ->orderBy('created_at', 'desc')
+            ->orderByDesc('created_at')
             ->get()
             ->unique('culture_id')
             ->values();

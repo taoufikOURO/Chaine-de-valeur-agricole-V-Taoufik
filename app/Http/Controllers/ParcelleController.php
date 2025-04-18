@@ -17,6 +17,7 @@ class ParcelleController extends Controller
     {
         #recupérer selon un id
         $parcelles = Parcelle::where('user_id', Auth::user()->id)
+            ->orderByDesc('created_at')
             ->withCount('fertilisation')
             ->get();
         return view('pages.parcelle.index', compact('parcelles'));

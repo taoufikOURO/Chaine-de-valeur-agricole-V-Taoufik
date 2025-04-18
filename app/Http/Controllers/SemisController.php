@@ -16,16 +16,19 @@ class SemisController extends Controller
     {
         $semis = Semis::where("user_id", Auth::user()->id)
             ->where('recolte_id', null)
+            ->orderByDesc('created_at')
             ->withCount('arrosage')
             ->get();
 
         return view('pages.semis.index', compact('semis'));
     }
-    public function historique(){
+    public function historique()
+    {
         $semis = Semis::where("user_id", Auth::user()->id)
-        ->whereNot('recolte_id', null)
-        ->withCount('arrosage')
-        ->get();
+            ->whereNot('recolte_id', null)
+            ->orderByDesc('created_at')
+            ->withCount('arrosage')
+            ->get();
         return view('pages.semis.historique', compact('semis'));
     }
 

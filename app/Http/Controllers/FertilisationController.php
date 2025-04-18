@@ -12,7 +12,9 @@ class FertilisationController extends Controller
 {
     public function index()
     {
-        $fertilisations = Fertilisation::where('user_id', Auth::user()->id)->get();
+        $fertilisations = Fertilisation::where('user_id', Auth::user()->id)
+        ->orderByDesc('created_at')
+        ->get();
         return view('pages.fertilisation.index', compact('fertilisations'));
     }
 

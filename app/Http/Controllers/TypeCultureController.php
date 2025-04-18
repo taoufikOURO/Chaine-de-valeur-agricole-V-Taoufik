@@ -11,7 +11,7 @@ class TypeCultureController extends Controller
 {
     public function index()
     {
-        $typeCultures = TypeCulture::all();
+        $typeCultures = TypeCulture::orderByDesc('created_at')->get();
         return view(
             'pages.type-culture.index',
             compact('typeCultures')
