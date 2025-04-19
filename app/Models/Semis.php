@@ -15,6 +15,7 @@ class Semis extends Model
     public function user() {
         return $this->belongsTo(User::class);
     }
+    
     public function arrosage() {
         return $this->hasMany(Arrosage::class);
     }
