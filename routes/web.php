@@ -32,6 +32,7 @@ Route::middleware('auth')->group(
     function () {
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
         Route::get('/dashboard', [AuthController::class, 'dashboard'])->middleware('verified')->name('dashboard');
+        Route::get('/globalStats', [AuthController::class, 'stream'])->middleware('verified')->name('stats.global');
         Route::get('/profile', [UserController::class, 'profile'])->middleware('verified')->name('profile');
         Route::get('/email/verify', [AuthController::class, 'verifyNotice'])->name('verification.notice');
         Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verifyEmail'])->middleware('signed')->name('verification.verify');

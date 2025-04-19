@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\AuthRequest;
 use App\Models\User;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use App\Models\Parcelle;
 use Illuminate\Http\Request;
+use App\Http\Requests\AuthRequest;
+use App\Static\StaticFunction;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use PhpParser\Node\Stmt\Static_;
 
 class AuthController extends Controller
 {
@@ -63,6 +67,46 @@ class AuthController extends Controller
     }
     public function dashboard()
     {
-        return view('pages.dashboard');
+        
+        $parcelles=$this->getGlobalData();
+        return view('pages.dashboard',['parcelles'=>$parcelles]);
     }
+    public function stream()
+    {
+        $data=$this->getGlobalData();
+        return StaticFunction::stream('globalStats',['data'=>$data],'statistique');
+    }
+    
+    public function getGlobalData()
+    {
+        $parcelles = Parcelle::with([
+            'semis.culture',
+            'fertilisation',
+            'recolte'
+        ])->get();
+    
+    
+        $data = $parcelles->map(function ($parcelle) {
+            return [
+              
+                "nom" => $parcelle->nom,
+                "recoltes" => $parcelle->recolte->map(function ($recolte) {
+                    return [
+                        "qte" => $recolte->quantite_recolte,
+                        "date_recolte" => Carbon::parse($recolte->date_recolte)->translatedFormat('d M Y'),
+                        "semis" => [
+                            "date_semis" => Carbon::parse($recolte->semis->date_semis)->translatedFormat('d M Y'),
+                            "culture" => [
+                                "nom_culture" =>  $recolte->semis->culture->nom, 
+                            ]
+    
+                        ]
+    
+                    ];
+                }),
+            ];
+        });
+        return $data;
+    }
+    
 }
