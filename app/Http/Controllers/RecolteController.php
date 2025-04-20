@@ -10,17 +10,13 @@ use Illuminate\Support\Facades\Auth;
 
 class RecolteController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index() {
-        $recoltes = Recolte::where('user_id',Auth::user()->id)->orderByDesc('created_at')->get();
+        $recoltes = Recolte::where('user_id',Auth::user()->id)
+        ->orderByDesc('created_at')
+        ->paginate(10);
         return view('pages.recolte.index', compact('recoltes'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $semis = Semis::where('user_id', Auth::user()->id)
@@ -29,9 +25,6 @@ class RecolteController extends Controller
         return view('pages.recolte.create', compact('semis'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $fields = $request->validate(
@@ -74,37 +67,5 @@ class RecolteController extends Controller
                 'errorMessage' => 'Une erreur est survenue lors de l\'enrégistrement de votre récolte. Veuillez réessayer.',
             ]);
         }
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }

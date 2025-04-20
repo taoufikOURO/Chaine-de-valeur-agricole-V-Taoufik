@@ -7,39 +7,54 @@ use App\Models\Statut;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 
 
 class ParcelleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         #recupérer selon un id
-        $parcelles = Parcelle::where('user_id', Auth::user()->id)->get();
+        $parcelles = Parcelle::where('user_id', Auth::user()->id)
+            ->orderByDesc('created_at')
+            ->withCount('fertilisation')
+            ->paginate(10);
         return view('pages.parcelle.index', compact('parcelles'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $statuts = Statut::all();
         return view('pages.parcelle.create', compact('statuts'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    public function checkCity($city)
+    {
+        $url = "https://nominatim.openstreetmap.org/search";
+        $response = Http::withHeaders([
+            'User-Agent' => 'LaravelApp/1.0'
+        ])->get($url, [
+            'q' => $city,
+            'format' => 'json',
+            'limit' => 1,
+        ]);
+
+        //dd($response->json());
+        $data = $response->json();
+
+        if (!empty($data)) {
+            return $data[0];
+        }
+
+        return null;
+    }
     public function store(Request $request)
     {
         $fields = $request->validate(
             [
                 "nom" => 'required|string|max:255|min:3',
-                "surface" => 'required|numeric',
+                "surface" => 'required|numeric|min:0.01|max:100',
                 "adresse" => 'required|string|max:255|min:3',
                 "statut_id" => 'required',
             ],
@@ -50,6 +65,8 @@ class ParcelleController extends Controller
 
                 "surface.required" => "La surface est obligatoire",
                 "surface.numeric" => "La surface doit être un nombre",
+                "surface.min" => "La surface doit être supérieure à 0.01 hectare, soit 100 m²",
+                "surface.max" => "La surface ne doit pas dépasser 100 hectare, soit 1 Km²",
                 "adresse.required" => "L'adresse est obligatoire",
 
                 "adresse.max" => "L'adresse ne doit pas dépasser 255 caractères",
@@ -60,33 +77,33 @@ class ParcelleController extends Controller
         );
         $fields['code'] = Str::uuid()->toString();
         $fields['user_id'] = Auth::user()->id;
-        try {
-            Parcelle::create($fields);
-            return redirect()->route('parcelle.index')->with([
-                'showSuccessModal' => true,
-                'successTitle' => 'Opération réussie',
-                'successMessage' => 'La parcelle a été créée avec succès',
-            ]);
-        } catch (Exception $e) {
+        $data = $this->checkCity($fields['adresse']);
+
+        if ($data) {
+            try {
+                $fields['adresse'] = $data['name'];
+                Parcelle::create($fields);
+                return redirect()->route('parcelle.index')->with([
+                    'showSuccessModal' => true,
+                    'successTitle' => 'Opération réussie',
+                    'successMessage' => 'La parcelle a été créée avec succès',
+                ]);
+            } catch (Exception $e) {
+                return back()->with([
+                    'showErrorModal' => true,
+                    'errorTitle' => 'Erreur lors de la création',
+                    'errorMessage' => 'Une erreur est survenue lors de la création de la parcelle. Veuillez réessayer.',
+                ]);
+            }
+        } else {
             return back()->with([
                 'showErrorModal' => true,
                 'errorTitle' => 'Erreur lors de la création',
-                'errorMessage' => 'Une erreur est survenue lors de la création de la parcelle. Veuillez réessayer.',
+                'errorMessage' => 'Veuillez saisir une adresse valide. Ce lieux n\'existe pas',
             ]);
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         $parcelle = Parcelle::findOrFail($id);
@@ -97,9 +114,6 @@ class ParcelleController extends Controller
         );
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         $fields = $request->validate([
@@ -132,9 +146,6 @@ class ParcelleController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         $parcelle = Parcelle::findOrFail($id);

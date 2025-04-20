@@ -17,7 +17,8 @@
         width: 80px;
     }
 
-    input:focus {
+    input:focus,
+    select:focus {
         outline: none;
     }
 
@@ -42,7 +43,6 @@
 </style>
 @extends('layout.layout')
 
-
 @section('content')
     @if (session('showErrorModal'))
         @include('components.error-modal')
@@ -56,71 +56,61 @@
                     <div class="mb-8 flex justify-between items-center">
                         <div>
                             <h1 class="text-4xl font-bold text-gray-900 mb-2 flex items-center">
-                                Enregistrer une nouvelle parcelle
+                                Editer son profil
                             </h1>
-                            <p class="text-emerald-600 font-medium ml-16">Ajoutez une nouvelle parcelle dans votre gestion
-                                de parcelles</p>
+                            <p class="text-emerald-600 font-medium ml-16">Modifier les informations de votrecompte.</p>
+                            </p>
                         </div>
                     </div>
-
                     <!-- Enhanced Form -->
-                    <form action="{{ route('parcelle.store') }}" method="POST"
+                    <form action="{{ route('profile.update', $user->id) }}" method="POST"
                         class="space-y-8 bg-white rounded-2xl shadow-[0_10px_40px_-15px_rgba(6,95,70,0.1)] p-8">
                         @csrf
+                        @method('PUT')
+
+                        <label for="email" class="block text-sm font-medium text-gray-400 mb-1 ml-2">Nom d'utilisateur</label>
                         <div class="relative bg-gradient-to-b from-white to-gray-50 rounded-xl p-1 shadow-inner">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <i class="fas fa-tag mr-2 text-gray-400"></i>
+                                <i class="fa-solid fa-circle-user  text-gray-400 mr-2 ml-2"></i>
                             </div>
-                            <input type="text" required name="nom" required
+                            <input type="text" required name="username" value="{{ $user->username }}"
                                 class="w-full pl-10 pr-4 py-3.5 rounded-xl border-0 ring-1 ring-gray-200 focus:ring-2 focus:border bg-transparent transition duration-200"
-                                placeholder="Nom de la parcelle">
+                                placeholder="Nom d'utilisateur">
                         </div>
-                        @error('nom')
-                            <span id="nom-error" class="text-red-500 text-xs mb-5">
+                        @error('username')
+                            <div id="libelle-error" class="text-red-500 font-bold text-xs mt-[-15px] text-center">
                                 {{ $message }}
-                            </span>
+                            </div>
                         @enderror
 
-                        <div class="relative bg-gradient-to-b from-white to-gray-50 rounded-xl p-1 shadow-inner">
-                            <select type="text" required name="statut_id" required
-                                class="w-full pl-10 pr-4 py-3.5 rounded-xl border-0 ring-1 ring-gray-200 focus:ring-2 focus:border bg-transparent transition duration-200">
-                                <option value="" disabled selected> Veuillez sélectionnez un statut pour votre
-                                    parcelle </option>
-                                @foreach ($statuts as $statut)
-                                    @unless (in_array($statut->libelle, ['en_culture', 'recoltee']))
-                                        <option value="{{ $statut->id }}" selected>En Jachère</option>
-                                    @endunless
-                                @endforeach
-                            </select>
-                        </div>
-
+                        <label for="email" class="block text-sm font-medium text-gray-400 mb-1 ml-2">Nom</label>
                         <div class="relative bg-gradient-to-b from-white to-gray-50 rounded-xl p-1 shadow-inner">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <i class="fas fa-layer-group mr-2 text-gray-400"></i>
+                                <i class="fa-solid fa-person  text-gray-400 mr-2 ml-2"></i>
                             </div>
-                            <input type="number" required name="surface" required min="0.01" max="100"
-                                step="0.01"
+                            <input type="text" required name="last_name" value="{{ $user->last_name }}"
                                 class="w-full pl-10 pr-4 py-3.5 rounded-xl border-0 ring-1 ring-gray-200 focus:ring-2 focus:border bg-transparent transition duration-200"
-                                placeholder="Donner la surface de la parcelle en hectare">
+                                placeholder="Veuillez entrer votre nom">
                         </div>
-                        @error('adresse')
-                            <span id="nom-error" class="text-red-500 text-xs mb-5">
+                        @error('last_name')
+                            <div id="libelle-error" class="text-red-500 font-bold text-xs mt-[-15px] text-center">
                                 {{ $message }}
-                            </span>
+                            </div>
                         @enderror
 
+                        <label for="email" class="block text-sm font-medium text-gray-400 mb-1 ml-2">Prénom</label>
                         <div class="relative bg-gradient-to-b from-white to-gray-50 rounded-xl p-1 shadow-inner">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <i class="fas fa-map-location-dot mr-2 text-gray-400"></i>
+                                <i class="fa-solid fa-person  text-gray-400 mr-2 ml-2"></i>
                             </div>
-                            <input type="text" required name="adresse" required
+                            <input type="text" required name="first_name" value="{{ $user->first_name }}"
                                 class="w-full pl-10 pr-4 py-3.5 rounded-xl border-0 ring-1 ring-gray-200 focus:ring-2 focus:border bg-transparent transition duration-200"
-                                placeholder="Adresse de la parcelle">
+                                placeholder="Veuillez entrer votre prénom">
                         </div>
-                        @error('adresse')
-                            <span id="nom-error" class="text-red-500 text-xs mb-5">
+                        @error('first_name')
+                            <div id="libelle-error" class="text-red-500 font-bold text-xs mt-[-15px] text-center">
                                 {{ $message }}
-                            </span>
+                            </div>
                         @enderror
 
                         <button type="submit"

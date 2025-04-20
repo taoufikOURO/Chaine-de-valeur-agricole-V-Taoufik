@@ -16,39 +16,33 @@ class UserController extends Controller
     public function profile()
     {
         $semis = Semis::where('user_id', Auth::user()->id)
-            ->orderBy('created_at', 'desc')
+            ->orderByDesc('created_at')
             ->get()
             ->unique('culture_id')
             ->values();
         return view('pages.profile', compact('semis'));
     }
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        $users = User::whereNot('id', Auth::user()->id)->get();
+        $users = User::whereNot('id', Auth::user()->id)
+            ->orderByDesc('created_at')
+            ->paginate(10);
         return view('pages.user.index', compact('users'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $roles = Role::all();
         return view('pages.user.create', compact('roles'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(RegisterRequest $request)
     {
         $fields = $request->all();
         try {
             $user = User::create($fields);
-            
+
             event(new Registered($user));
 
             return redirect()->route('user.index')->with([
@@ -65,17 +59,6 @@ class UserController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         $user = User::where('id', $id)->first();
@@ -83,9 +66,6 @@ class UserController extends Controller
         return view('pages.user.edit', compact('user', 'roles'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         $fields = $request->validate([
@@ -112,13 +92,5 @@ class UserController extends Controller
                 'errorMessage' => 'L\'enregitrement des modifications apportés au compte utilisateur ont échoué. Veuillez réessayer plus tard.',
             ]);
         }
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }

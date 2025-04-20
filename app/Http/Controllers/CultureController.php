@@ -11,21 +11,16 @@ use Illuminate\Support\Str;
 
 class CultureController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        $cultures = Culture::all();
+        $cultures = Culture::orderByDesc('created_at')
+            ->paginate(10);
         return view(
             'pages.culture.index',
             compact('cultures')
         );
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $typeCultures = TypeCulture::all();
@@ -35,9 +30,6 @@ class CultureController extends Controller
         );
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $fields = $request->validate(
@@ -68,17 +60,6 @@ class CultureController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         $culture = Culture::findOrFail($id);
@@ -86,9 +67,6 @@ class CultureController extends Controller
         return view('pages.culture.edit', compact('culture', 'typeCultures'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         $fields = $request->validate([
@@ -115,9 +93,6 @@ class CultureController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         $culture = Culture::findOrFail($id);

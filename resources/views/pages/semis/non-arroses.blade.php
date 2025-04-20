@@ -19,9 +19,9 @@
             <div class="mb-8 flex justify-between items-center">
                 <div>
                     <h1 class="text-4xl font-bold text-gray-900 mb-2 flex items-center">
-                        Liste des semis
+                        Liste des semis non arrosés
                     </h1>
-                    <p class="text-emerald-600 font-medium ml-16">visualiser tout mes semis non recoltés sur ma parcelle</p>
+                    <p class="text-emerald-600 font-medium ml-16">visualiser tout mes semis non arrosés sur ma parcelle</p>
                 </div>
             </div>
 
@@ -40,41 +40,12 @@
                             placeholder="Rechercher par le nom de la culture..." autocomplete="off">
 
                     </div>
-                    <a href="{{ route('semis.create') }}"
-                        class="cursor-pointer group relative flex items-center gap-3 bg-gradient-to-r from-indigo-500 to-indigo-600 text-white py-2.5 px-5 rounded-lg transition-all duration-300 ease-in-out transform hover:scale-105 shadow-md hover:shadow-lg overflow-hidden font-medium">
-                        <span
-                            class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-20 transform -translate-x-full group-hover:translate-x-full transition-all duration-1000 ease-out"></span>
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                            class="h-5 w-5 transition-transform duration-300 group-hover:rotate-90" viewBox="0 0 24 24"
-                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <line x1="12" y1="8" x2="12" y2="16"></line>
-                            <line x1="8" y1="12" x2="16" y2="12"></line>
-                        </svg>
-                        <span class="relative z-10">Ajouter</span>
-                    </a>
                     <a href="{{ route('arrosage.create') }}"
-                        class="cursor-pointer group relative flex items-center gap-3 bg-gradient-to-r from-indigo-500 to-indigo-600 text-white py-2.5 px-5 rounded-lg transition-all duration-300 ease-in-out transform hover:scale-105 shadow-md hover:shadow-lg overflow-hidden font-medium">
-                        <span
-                            class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-20 transform -translate-x-full group-hover:translate-x-full transition-all duration-1000 ease-out"></span>
-                        <i class="fa-solid fa-water h-5 w-5 transition-transform duration-300 group-hover:rotate-2"></i>
-                        <span class="relative z-10">Arroser</span>
-                    </a>
-                    <a href="{{ route('recolte.create') }}"
                         class="cursor-pointer group relative flex items-center gap-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white py-2.5 px-5 rounded-lg transition-all duration-300 ease-in-out transform hover:scale-105 shadow-md hover:shadow-lg overflow-hidden font-medium">
                         <span
                             class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-20 transform -translate-x-full group-hover:translate-x-full transition-all duration-1000 ease-out"></span>
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                            class="h-5 w-5 transition-transform duration-300 group-hover:rotate-12" viewBox="0 0 24 24"
-                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round">
-                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7">
-                            </path>
-                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z">
-                            </path>
-                        </svg>
-                        <span class="relative z-10">Récolter</span>
+                            <i class="fa-solid fa-water h-5 w-5 transition-transform duration-300 group-hover:rotate-2"></i>
+                        <span class="relative z-10">Arrroser</span>
                     </a>
                 </div>
             </div>
@@ -119,8 +90,9 @@
                 <p class="text-gray-500">Aucune donnée ne correspond à votre recherche.</p>
             </div>
 
+            <!-- Information sur le nombre de résultats -->
             <div class="mt-5 text-sm text-gray-600 flex justify-between items-center">
-                {{$semis->links('pagination::tailwind')}}
+                <p id="resultCount" class="font-medium">Affichage de 0 entrées</p>
             </div>
         </div>
         <script src="{{ asset('js/type-culture/index.js') }}"></script>

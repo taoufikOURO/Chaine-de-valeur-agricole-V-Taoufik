@@ -12,22 +12,26 @@ use Illuminate\Support\Str;
 
 class SemisController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $semis = Semis::where("user_id", Auth::user()->id)
             ->where('recolte_id', null)
+            ->orderByDesc('created_at')
             ->withCount('arrosage')
-            ->get();
-        
+            ->paginate(10);
+
         return view('pages.semis.index', compact('semis'));
     }
+    public function historique()
+    {
+        $semis = Semis::where("user_id", Auth::user()->id)
+            ->whereNot('recolte_id', null)
+            ->orderByDesc('created_at')
+            ->withCount('arrosage')
+            ->paginate(10);
+        return view('pages.semis.historique', compact('semis'));
+    }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $cultures = Culture::all();
@@ -37,9 +41,6 @@ class SemisController extends Controller
         return view('pages.semis.create', compact('cultures', 'parcelles'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $fields = $request->validate(
@@ -71,37 +72,5 @@ class SemisController extends Controller
                 'errorMessage' => 'Une erreur est survenue lors de l\'ajout de votre semis. Veuillez réessayer.',
             ]);
         }
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }

@@ -23,18 +23,35 @@
 
     <div class="sidebar shadow-sm" id="sidebar">
         <div class="logo-container">
-            <div id="toggle-btn" data-tooltip="Réduire le menu" class=" cursor-pointer">
+            <div id="toggle-btn" data-tooltip="Réduire le menu" class="cursor-pointer">
                 @include('components.logo')
             </div>
-            <span class="logo-text">MON APPLI</span>
+            <h1 class="logo-text text-3xl font-extrabold text-gray-900 tracking-tight flex items-center gap-4 md:block">
+                Mon Appli
+            </h1>
         </div>
 
         <div class="sidebar-content">
             <nav class="mt-6">
+                <div class="section-title">Analyses</div>
                 <a href="{{ route('dashboard') }}" class="nav-item @if (Route::current()->uri() == 'dashboard') active @endif ">
                     <i class="fas fa-chart-line"></i>
                     <span class="nav-text">Tableau de bord</span>
                 </a>
+                <a href="{{ route('charts') }}" class="nav-item @if (Route::current()->uri() == 'dashboard/charts') active @endif ">
+                    <i class="fas fa-chart-simple"></i>
+                    <span class="nav-text">Graphes</span>
+                </a>
+                @if (Auth::user()->role->libelle === 'agriculteur')
+                    <a href="{{ route('semisNonArroses') }}"
+                        class="nav-item flex items-center justify-between gap-2 @if (Route::currentRouteName() == 'semisNonArroses') active @endif">
+
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-sun-plant-wilt"></i>
+                            <span class="nav-text">Semis non arrosés</span>
+                        </div>
+                    </a>
+                @endif
                 @if (Auth::user()->role->libelle === 'agriculteur')
                     <div class="section-title">Parcelles</div>
                     <a href="{{ route('parcelle.index') }}"
@@ -53,7 +70,7 @@
                     <div class="section-title">Cultures et types de culture</div>
                     <a href="{{ route('culture.index') }}"
                         class="nav-item @if (Route::current()->uri() == 'culture') active @endif ">
-                        <i class="fa-solid fa-leaf"></i>
+                        <i class="fa-solid fa-seedling"></i>
                         <span class="nav-text">Liste des cultures</span>
                     </a>
                     <a href="{{ route('culture.create') }}"
@@ -125,6 +142,14 @@
                         <span class="nav-text">Ajouter un utilisateur</span>
                     </a>
                 @endif
+                @if (Auth::user()->role->libelle === 'agriculteur')
+                    <div class="section-title">Historique</div>
+                    <a href="{{ route('historique.semis') }}"
+                        class="nav-item @if (Route::current()->uri() == 'historique/semis') active @endif">
+                        <i class="fa-solid fa-wheat-awn"></i>
+                        <span class="nav-text">Historique des semis</span>
+                    </a>
+                @endif
             </nav>
         </div>
     </div>
@@ -137,18 +162,20 @@
 
                 <div class="dropdown-wrapper">
                     <button class="flex items-center gap-2 cursor-pointer" id="profile-btn">
-                        <div class="w-9 h-9 rounded-full bg-agri-green-100 flex items-center justify-center">
-                            <i class="fas fa-user text-agri-green-500"></i>
-                        </div>
-                        <span class="text-sm font-medium hidden md:block">{{ Auth::user()->first_name }}
-                            {{ Auth::user()->last_name }}</span>
-                        <i class="fas fa-chevron-down text-xs text-gray-500 hidden md:block"></i>
+                        <h1 class="text-sm font-extrabold text-gray-900 tracking-tight mb-6 flex items-center gap-4 md:block">
+                            <span class="border-l-4 border-green-500 pl-4">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</span>
+                        </h1>
                     </button>
 
                     <div class="dropdown-content" id="profile-dropdown">
-                        <a class="dropdown-item" href="{{ route('profile') }}">
+                        <a class="dropdown-item" href="{{ route('profile.index') }}">
                             <i class="fas fa-user-circle"></i>
                             <span>Mon profil</span>
+                        </a>
+                        <a class="dropdown-item" href="{{ route('profile.edit', Auth::user()->id) }}"
+                            id="edit-profile-button">
+                            <i class="fas fa-pen-to-square"></i>
+                            <span>Editer le profil</span>
                         </a>
                         <div class="dropdown-divider"></div>
                         <div class="dropdown-divider"></div>

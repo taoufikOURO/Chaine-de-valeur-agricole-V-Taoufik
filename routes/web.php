@@ -5,9 +5,11 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CultureController;
 use App\Http\Controllers\FertilisationController;
 use App\Http\Controllers\ParcelleController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RecolteController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\SemisController;
+use App\Http\Controllers\StatisticsController;
 use App\Http\Controllers\TypeCultureController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\CheckRole;
@@ -31,9 +33,10 @@ Route::middleware('guest')->group(
 Route::middleware('auth')->group(
     function () {
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-        Route::get('/dashboard', [AuthController::class, 'dashboard'])->middleware('verified')->name('dashboard');
         Route::get('/globalStats', [AuthController::class, 'stream'])->middleware('verified')->name('stats.global');
-        Route::get('/profile', [UserController::class, 'profile'])->middleware('verified')->name('profile');
+        Route::get('/dashboard', [StatisticsController::class, 'dashboard'])->middleware('verified')->name('dashboard');
+        Route::get('dashboard/charts', [StatisticsController::class, 'charts'])->middleware('verified')->name('charts');
+        Route::resource('profile', ProfileController::class)->middleware('verified');
         Route::get('/email/verify', [AuthController::class, 'verifyNotice'])->name('verification.notice');
         Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verifyEmail'])->middleware('signed')->name('verification.verify');
         Route::post('/email/verification-notification', [AuthController::class, 'verifyHandler'])->middleware('throttle:6,1')->name('verification.send');
@@ -54,5 +57,7 @@ Route::middleware(['auth', CheckRole::class . ':agriculteur', 'verified'])->grou
         Route::resource('recolte', RecolteController::class);
         Route::resource('fertilisation', FertilisationController::class);
         Route::resource('arrosage', ArrosageController::class);
+        Route::get('dashboard/semis', [StatisticsController::class, 'semisNonArroses'])->name('semisNonArroses');
+        Route::get('historique/semis', [SemisController::class, 'historique'])->name('historique.semis');
     }
 );

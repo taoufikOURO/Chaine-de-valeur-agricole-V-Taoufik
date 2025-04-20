@@ -67,7 +67,7 @@
                             <tr class="transition-all duration-300 ease-in-out">
                                 <td>{{ $fertilisation->date_fertilisation }}</td>
                                 <td>{{ $fertilisation->parcelle->nom }} <span class="text-green-400">|</span>
-                                    {{ $fertilisation->parcelle->surface }} m2 </td>
+                                    {{ $fertilisation->parcelle->surface }} hectares </td>
                                 <td>{{ $fertilisation->description }}</td>
                             </tr>
                         @endforeach
@@ -85,9 +85,8 @@
                 <p class="text-gray-500">Aucune donnée ne correspond à votre recherche.</p>
             </div>
 
-            <!-- Information sur le nombre de résultats -->
             <div class="mt-5 text-sm text-gray-600 flex justify-between items-center">
-                <p id="resultCount" class="font-medium">Affichage de 0 entrées</p>
+                {{$fertilisations->links('pagination::tailwind')}}
             </div>
         </div>
         <script src="{{ asset('js/type-culture/index.js') }}"></script>
