@@ -33,6 +33,7 @@ Route::middleware('guest')->group(
 Route::middleware('auth')->group(
     function () {
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+        Route::get('/globalStats', [AuthController::class, 'stream'])->middleware('verified')->name('stats.global');
         Route::get('/dashboard', [StatisticsController::class, 'dashboard'])->middleware('verified')->name('dashboard');
         Route::get('dashboard/charts', [StatisticsController::class, 'charts'])->middleware('verified')->name('charts');
         Route::resource('profile', ProfileController::class)->middleware('verified');
