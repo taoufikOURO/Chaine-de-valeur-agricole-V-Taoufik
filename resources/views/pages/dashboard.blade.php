@@ -2,21 +2,31 @@
 
 @section('title', 'Tableau de bord')
 
+<style>
+    .border-button {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .border-button::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 0;
+        height: 2px;
+        background: #3b82f6;
+        transition: width 0.3s ease;
+    }
+
+    .border-button:hover::before {
+        width: 100%;
+    }
+</style>
 @section('content')
     @if (session('showErrorModal'))
         @include('components.error-modal')
     @endif
-    <h2>Bienvenue sur la page d'accueil</h2>
-    <p>Ceci est le contenu de la page d'accueil.</p>
-  
-    <a href="{{route('stats.global')}}"
-                            class=" mt-5 w-full group relative overflow-hidden bg-gradient-to-r from-emerald-600 to-emerald-700 text-white rounded-xl px-4 py-5 font-medium hover:from-emerald-700 hover:to-emerald-800 transition duration-300 shadow-lg hover:shadow-emerald-200/50 cursor-pointer">
-                            <div class="absolute inset-0 bg-white/10 group-hover:bg-white/0 transition duration-300"></div>
-                            <i class="fas fa-plus-circle mr-2"></i>
-                            <span class="relative">télécharger</span>
- </a>
-
-
     @if (Auth::user()->role->libelle === 'admin')
         <h1 class="text-4xl font-extrabold text-gray-900 tracking-tight mb-6 flex items-center gap-4">
             <div
@@ -298,6 +308,21 @@
                 </div>
             </div>
         </div>
+        {{-- Télécharger les stats --}}
+        @if (Auth::user()->role->libelle === 'admin')
+            <a href="{{ route('stats.global') }}"
+                class="border-button bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold border border-blue-200 flex items-center justify-center gap-2 w-100 cursor-pointer mb-10">
+                <i class="fas fa-download"></i>
+                Télécharger
+            </a>
+        @endif
+        @if (Auth::user()->role->libelle === 'agriculteur')
+            <a href="{{ route('stats.agriculteur') }}"
+                class="border-button bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold border border-blue-200 flex items-center justify-center gap-2 w-100 cursor-pointer mb-10">
+                <i class="fas fa-download"></i>
+                Télécharger
+            </a>
+        @endif
 
 
         {{-- ALERTES --}}
@@ -326,7 +351,8 @@
                             </div>
                             <div>
                                 <h4 class="font-medium text-red-800">Alerte fertilisation</h4>
-                                <p class="text-sm text-red-600">Vous avez {{ $stats['fertilisation']['parcellesSansFertilisationRecente'] }} parcelle(s) dont la
+                                <p class="text-sm text-red-600">Vous avez
+                                    {{ $stats['fertilisation']['parcellesSansFertilisationRecente'] }} parcelle(s) dont la
                                     dernière fertilisation remonte a 6 mois: </p>
                             </div>
                         </a>

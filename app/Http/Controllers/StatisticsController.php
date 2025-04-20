@@ -7,6 +7,7 @@ use App\Models\Fertilisation;
 use App\Models\Parcelle;
 use App\Models\Semis;
 use App\Models\User;
+use App\Static\StaticFunction;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -162,5 +163,82 @@ class StatisticsController extends Controller
     {
         $stats = $this->loadStats();
         return view('pages.graphes', compact('stats'));
+    }
+
+    public function statsAgriculteur() {
+        $data = $this->getStatsAgriculteur();
+        return StaticFunction::stream('agriculteur-stats', ['data' => $data], 'statistiques');
+    }
+    public function getStatsAgriculteur()
+    {
+
+        $parcelles = Parcelle::with([
+            'semis.culture',
+            'fertilisation',
+            'recolte'
+        ])->where('user_id', Auth::user()->id)
+            ->whereHas('semis')
+            ->whereHas('fertilisation')
+            ->whereHas('recolte')
+            ->get();
+        $data = $parcelles->map(function ($parcelle) {
+            return [
+
+                "nom" => $parcelle->nom,
+                "recoltes" => $parcelle->recolte->map(function ($recolte) {
+                    return [
+                        "qte" => $recolte->quantite_recolte,
+                        "date_recolte" => Carbon::parse($recolte->date_recolte)->translatedFormat('d M Y'),
+                        "semis" => [
+                            "date_semis" => Carbon::parse($recolte->semis->date_semis)->translatedFormat('d M Y'),
+                            "culture" => [
+                                "nom_culture" =>  $recolte->semis->culture->nom,
+                            ]
+
+                        ]
+
+                    ];
+                }),
+            ];
+        });
+        return $data;
+    }
+
+    public function stream()
+    {
+        $data = $this->getGlobalData();
+        return StaticFunction::stream('globalStats', ['data' => $data], 'statistiques');
+    }
+
+    public function getGlobalData()
+    {
+        $parcelles = Parcelle::with([
+            'semis.culture',
+            'fertilisation',
+            'recolte'
+        ])->get();
+
+
+        $data = $parcelles->map(function ($parcelle) {
+            return [
+
+                "nom" => $parcelle->nom,
+                "recoltes" => $parcelle->recolte->map(function ($recolte) {
+                    return [
+                        "qte" => $recolte->quantite_recolte,
+                        "date_recolte" => Carbon::parse($recolte->date_recolte)->translatedFormat('d M Y'),
+                        "semis" => [
+                            "date_semis" => Carbon::parse($recolte->semis->date_semis)->translatedFormat('d M Y'),
+                            "culture" => [
+                                "nom_culture" =>  $recolte->semis->culture->nom,
+                            ]
+
+                        ]
+
+                    ];
+                }),
+            ];
+        });
+        return $data;
     }
 }
