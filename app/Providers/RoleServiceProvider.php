@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Role;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 class RoleServiceProvider extends ServiceProvider
@@ -17,7 +18,9 @@ class RoleServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->seedRoles();
+        if (Schema::hasTable('roles')) {
+            $this->seedRoles();
+        }
     }
     protected function seedRoles()
     {
