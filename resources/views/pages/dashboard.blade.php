@@ -209,6 +209,12 @@
                 </div>
             </div>
         </div>
+        {{-- Télécharger les stats --}}
+        <a href="{{ route('stats.global') }}"
+            class="border-button bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold border border-blue-200 flex items-center justify-center gap-2 w-100 cursor-pointer mb-10">
+            <i class="fas fa-download"></i>
+            Télécharger
+        </a>
     @endif
 
     @if (Auth::user()->role->libelle === 'agriculteur')
@@ -309,22 +315,11 @@
             </div>
         </div>
         {{-- Télécharger les stats --}}
-        @if (Auth::user()->role->libelle === 'admin')
-            <a href="{{ route('stats.global') }}"
-                class="border-button bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold border border-blue-200 flex items-center justify-center gap-2 w-100 cursor-pointer mb-10">
-                <i class="fas fa-download"></i>
-                Télécharger
-            </a>
-        @endif
-        @if (Auth::user()->role->libelle === 'agriculteur')
-            <a href="{{ route('stats.agriculteur') }}"
-                class="border-button bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold border border-blue-200 flex items-center justify-center gap-2 w-100 cursor-pointer mb-10">
-                <i class="fas fa-download"></i>
-                Télécharger
-            </a>
-        @endif
-
-
+        <a href="{{ route('stats.agriculteur') }}"
+            class="border-button bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold border border-blue-200 flex items-center justify-center gap-2 w-100 cursor-pointer mb-10">
+            <i class="fas fa-download"></i>
+            Télécharger
+        </a>
         {{-- ALERTES --}}
         <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-2 gap-6 mb-8">
             @if ($stats['semis']['nonArroses'] > 0 && Auth::user()->role->libelle === 'agriculteur')
