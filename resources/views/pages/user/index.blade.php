@@ -97,7 +97,7 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <form action="{{ route('user.edit', $user->id) }}" method="GET">
+                                    <form action="{{ route('user.edit', ['user' => Crypt::encrypt($user->id)]) }}" method="GET">
                                         @csrf
                                         <button type="submit"
                                             class="cursor-pointer group relative flex items-center gap-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white py-2.5 px-5 rounded-lg transition-all duration-300 ease-in-out transform hover:scale-105 shadow-md hover:shadow-lg overflow-hidden font-medium">

@@ -10,6 +10,7 @@ use Exception;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 
 class UserController extends Controller
 {
@@ -61,9 +62,18 @@ class UserController extends Controller
 
     public function edit(string $id)
     {
-        $user = User::where('id', $id)->first();
-        $roles = Role::all();
-        return view('pages.user.edit', compact('user', 'roles'));
+        try{
+            $id = Crypt::decrypt($id);
+            $user = User::where('id', $id)->first();
+            $roles = Role::all();
+            return view('pages.user.edit', compact('user', 'roles'));
+        }catch (Exception $e) {
+            return redirect()->route('user.index')->with([
+                'showErrorModal' => true,
+                'errorTitle' => 'Erreur de récupération de l\'utilisateur',
+                'errorMessage' => 'Cet utilisateur n\'a pas pu être récupéré. Veuillez réessayer plus tard',
+            ]);
+        }
     }
 
     public function update(Request $request, string $id)
