@@ -6,6 +6,7 @@ use App\Models\Culture;
 use App\Models\TypeCulture;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Str;
 
 
@@ -62,9 +63,19 @@ class CultureController extends Controller
 
     public function edit(string $id)
     {
-        $culture = Culture::findOrFail($id);
-        $typeCultures = TypeCulture::all();
-        return view('pages.culture.edit', compact('culture', 'typeCultures'));
+        try {
+
+            $id = Crypt::decrypt($id);
+            $culture = Culture::findOrFail($id);
+            $typeCultures = TypeCulture::all();
+            return view('pages.culture.edit', compact('culture', 'typeCultures'));
+        } catch (Exception $e) {
+            return redirect()->route('culture.index')->with([
+                'showErrorModal' => true,
+                'errorTitle' => 'Erreur de récupération de la culture',
+                'errorMessage' => 'Cette culture n\'a pas pu être récupérée. Veuillez réessayer plus tard',
+            ]);
+        }
     }
 
     public function update(Request $request, string $id)

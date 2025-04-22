@@ -173,6 +173,3 @@ Ce projet a été réalisé en équipe dans un cadre pédagogique afin de mettre
 - **MARDJA Liguili**
 
 📅 Date : Avril 2025
-
-
-

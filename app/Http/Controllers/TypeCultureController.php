@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\TypeCulture;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Str;
 
 class TypeCultureController extends Controller
@@ -56,8 +57,17 @@ class TypeCultureController extends Controller
 
     public function edit(string $id)
     {
-        $typeCulture = TypeCulture::findOrFail($id);
-        return view('pages.type-culture.edit', compact('typeCulture'));
+        try{
+            $id = Crypt::decrypt($id);
+            $typeCulture = TypeCulture::findOrFail($id);
+            return view('pages.type-culture.edit', compact('typeCulture'));
+        }catch (Exception $e) {
+            return redirect()->route('type-culture.index')->with([
+                'showErrorModal' => true,
+                'errorTitle' => 'Erreur de récupération du type de culture',
+                'errorMessage' => 'Ce type de culture n\'a pas pu être récupéré. Veuillez réessayer plus tard',
+            ]);
+        }
     }
 
     public function update(Request $request, string $id)

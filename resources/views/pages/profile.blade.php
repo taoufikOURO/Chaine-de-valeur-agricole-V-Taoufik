@@ -50,7 +50,7 @@
                             </div>
 
                             <!-- Edit profile button -->
-                            <a href="{{ route('profile.edit', Auth::user()->id) }}"
+                            <a href="{{ route('profile.edit', ['profile' => Crypt::encrypt(Auth::user()->id)]) }}"
                                 class="mt-4 sm:mt-0 py-2.5 px-5 text-center font-medium rounded-lg text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition duration-150 ease-in-out shadow-sm">
                                 <span class="flex items-center justify-center">
                                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

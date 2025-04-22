@@ -7,6 +7,7 @@ use App\Models\Statut;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 
@@ -106,12 +107,21 @@ class ParcelleController extends Controller
 
     public function edit(string $id)
     {
-        $parcelle = Parcelle::findOrFail($id);
-        $statuts = Statut::all();
-        return view(
-            'pages.parcelle.edit',
-            compact('parcelle', 'statuts')
-        );
+        try {
+            $id = Crypt::decrypt($id);
+            $parcelle = Parcelle::findOrFail($id);
+            $statuts = Statut::all();
+            return view(
+                'pages.parcelle.edit',
+                compact('parcelle', 'statuts')
+            );
+        } catch (Exception $e) {
+            return redirect()->route('parcelle.index')->with([
+                'showErrorModal' => true,
+                'errorTitle' => 'Erreur de récupération de la parcelle',
+                'errorMessage' => 'Cette parcelle n\'a pas pu être récupérée. Veuillez réessayer plus tard',
+            ]);
+        }
     }
 
     public function update(Request $request, string $id)
