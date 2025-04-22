@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 class UserServiceProvider extends ServiceProvider
@@ -22,10 +23,13 @@ class UserServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->seedUsers();
+        if (Schema::hasTable('users')) {
+            $this->seedUsers();
+        }
     }
     protected function seedUsers()
     {
+
         $users = [
             [
                 'username' => 'admin',

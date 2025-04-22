@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Statut;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 class StatutServiceProvider extends ServiceProvider
@@ -20,7 +21,9 @@ class StatutServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->seedStatuts();
+        if (Schema::hasTable('statuts')) {
+            $this->seedStatuts();
+        }
     }
 
     protected function seedStatuts()
