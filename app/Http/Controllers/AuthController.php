@@ -26,7 +26,7 @@ class AuthController extends Controller
     {
         $data = $request->all();
         $user = User::where('email', $data['email'])->first();
-        if($user){
+        if ($user) {
 
             if ($user->active) {
                 if (Auth::attempt(['email' => $data['email'], 'password' => $data['password']])) {
@@ -45,7 +45,7 @@ class AuthController extends Controller
                     'errorMessage' => 'Votre compte est désactivé, contactez l\'administrateur.'
                 ]);
             }
-        }else{
+        } else {
             return back()->with([
                 'showErrorModal' => true,
                 'errorTitle' => 'Erreur de connexion',
@@ -58,13 +58,15 @@ class AuthController extends Controller
     {
         return view('pages.verify-email');
     }
-    public function verifyEmail (EmailVerificationRequest $request) {
+    public function verifyEmail(EmailVerificationRequest $request)
+    {
         $request->fulfill();
         return redirect()->route('dashboard');
     }
-    public function verifyHandler (Request $request) {
+    public function verifyHandler(Request $request)
+    {
         $request->user()->sendEmailVerificationNotification();
-        return back()->with('message', 'Verification link sent!');
+        return redirect()->route('verification.notice')->with('message', 'Verification link sent!');
     }
 
     public function logout(Request $request)
