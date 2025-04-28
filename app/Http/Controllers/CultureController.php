@@ -108,14 +108,14 @@ class CultureController extends Controller
     {
         $culture = Culture::findOrFail($id);
         if ($culture->semis()->exists()) {
-            return back()->with([
+            return redirect()->route('culture.index')->with([
                 'showErrorModal' => true,
                 'errorTitle' => 'Erreur lors de la suppression',
                 'errorMessage' => 'Cet élément ne peux pas être supprimé car il est lié à un autre élément',
             ]);
         } else {
             $culture->delete();
-            return back()->with([
+            return redirect()->route('culture.index')->with([
                 'showSuccessModal' => true,
                 'successTitle' => 'Suppression réussie',
                 'successMessage' => 'La culture a bien été supprimé',
