@@ -33,8 +33,6 @@ Route::middleware('guest')->group(
 Route::middleware('auth')->group(
     function () {
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-        Route::get('/globalStats', [StatisticsController::class, 'stream'])->middleware('verified')->name('stats.global');
-        Route::get('/statsAgriculteur', [StatisticsController::class, 'statsAgriculteur'])->middleware('verified')->name('stats.agriculteur');
         Route::get('/dashboard', [StatisticsController::class, 'dashboard'])->middleware('verified')->name('dashboard');
         Route::get('dashboard/charts', [StatisticsController::class, 'charts'])->middleware('verified')->name('charts');
         Route::resource('profile', ProfileController::class)->middleware('verified');
@@ -45,6 +43,7 @@ Route::middleware('auth')->group(
 );
 Route::middleware(['auth', CheckRole::class . ':admin', 'verified'])->group(
     function () {
+        Route::get('/globalStats', [StatisticsController::class, 'stream'])->middleware('verified')->name('stats.global');
         Route::resource('culture', CultureController::class);
         Route::resource('type-culture', TypeCultureController::class);
         Route::resource('user', UserController::class);
@@ -53,6 +52,7 @@ Route::middleware(['auth', CheckRole::class . ':admin', 'verified'])->group(
 
 Route::middleware(['auth', CheckRole::class . ':agriculteur', 'verified'])->group(
     function () {
+        Route::get('/statsAgriculteur', [StatisticsController::class, 'statsAgriculteur'])->middleware('verified')->name('stats.agriculteur');
         Route::resource('parcelle', ParcelleController::class);
         Route::resource('semis', SemisController::class);
         Route::resource('recolte', RecolteController::class);
