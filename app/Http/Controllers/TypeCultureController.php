@@ -57,11 +57,11 @@ class TypeCultureController extends Controller
 
     public function edit(string $id)
     {
-        try{
+        try {
             $id = Crypt::decrypt($id);
             $typeCulture = TypeCulture::findOrFail($id);
             return view('pages.type-culture.edit', compact('typeCulture'));
-        }catch (Exception $e) {
+        } catch (Exception $e) {
             return redirect()->route('type-culture.index')->with([
                 'showErrorModal' => true,
                 'errorTitle' => 'Erreur de récupération du type de culture',
@@ -99,14 +99,14 @@ class TypeCultureController extends Controller
     {
         $typeCulture = TypeCulture::findOrFail($id);
         if ($typeCulture->culture()->exists()) {
-            return back()->with([
+            return redirect()->route('type-culture.index')->with([
                 'showErrorModal' => true,
                 'errorTitle' => 'Erreur lors de la suppression',
                 'errorMessage' => 'Cet élément ne peux pas être supprimé car il est lié à un autre élément',
             ]);
         } else {
             $typeCulture->delete();
-            return back()->with([
+            return  redirect()->route('type-culture.index')->with([
                 'showSuccessModal' => true,
                 'successTitle' => 'Suppression réussie',
                 'successMessage' => 'Le type de culture a bien été supprimé',
