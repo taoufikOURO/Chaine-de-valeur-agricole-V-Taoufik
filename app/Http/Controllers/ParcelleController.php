@@ -160,14 +160,14 @@ class ParcelleController extends Controller
     {
         $parcelle = Parcelle::findOrFail($id);
         if ($parcelle->semis()->exists() || $parcelle->fertilisation()->exists() || $parcelle->recolte()->exists()) {
-            return back()->with([
+            return redirect()->route('parcelle.index')->with([
                 'showErrorModal' => true,
                 'errorTitle' => 'Erreur lors de la suppression',
                 'errorMessage' => 'Cet élément ne peux pas être supprimé car il est lié à un autre élément',
             ]);
         } else {
             $parcelle->delete();
-            return back()->with([
+            return redirect()->route('parcelle.index')->with([
                 'showSuccessModal' => true,
                 'successTitle' => 'Suppression réussie',
                 'successMessage' => 'La parcelle a bien été supprimé',
