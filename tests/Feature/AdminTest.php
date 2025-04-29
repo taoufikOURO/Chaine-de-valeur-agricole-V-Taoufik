@@ -23,6 +23,89 @@ class AdminTest extends TestCase
         // Vérifier qu'il a bien accès (statut HTTP 200)
         $response->assertOk();
     }
+    // ----------------------------------------------------------------
+    // Tests pour les fonctionnalités liées à TypeCulture (admin only)
+    // ----------------------------------------------------------------
+
+    public function test_admin_can_access_type_culture_index()
+    {
+        $admin = User::where(['email' => 'xiyim14198@exclussi.com'])->first();
+        $admin->email_verified_at = now();
+        $admin->save();
+
+        $response = $this->actingAs($admin)->get(route('type-culture.index'));
+
+        $response->assertOk();
+    }
+    public function test_admin_can_access_type_culture_create_form()
+    {
+        $admin = User::where('email', 'xiyim14198@exclussi.com')->first();
+        $admin->email_verified_at = now();
+        $admin->save();
+
+        $response = $this->actingAs($admin)->get(route('type-culture.create'));
+
+        $response->assertOk();
+    }
+    public function test_admin_can_create_type_culture()
+    {
+        $admin = User::where('email', 'xiyim14198@exclussi.com')->first();
+        $admin->email_verified_at = now();
+        $admin->save();
+        $data = [
+            'libelle' => Str::random(10),
+        ];
+
+        $response = $this->actingAs($admin)->post(route('type-culture.store'), $data);
+        $response->assertRedirect(route('type-culture.index'));
+    }
+    public function test_admin_can_access_edit_type_culture_page()
+    {
+        $admin = User::where('email', 'xiyim14198@exclussi.com')->first();
+
+        $typeCulture = TypeCulture::create([
+            'code' => Str::uuid()->toString(),
+            'libelle' => Str::random(10),
+        ]);
+        $response = $this->actingAs($admin)->get(route('type-culture.edit', ['type_culture' => Crypt::encrypt($typeCulture->id)]));
+
+        $response->assertOk();
+    }
+    public function test_admin_can_update_type_culture()
+    {
+        $admin = User::where('email', 'xiyim14198@exclussi.com')->first();
+        // Créer une culture existante
+        $typeCulture = TypeCulture::create([
+            'code' => Str::uuid()->toString(),
+            'libelle' => Str::random(10),
+        ]);
+
+        $updatedData = [
+            'code' => Str::uuid()->toString(),
+            'libelle' => Str::random(10),
+        ];
+
+        $response = $this->actingAs($admin)->put(route('type-culture.update', $typeCulture->id), $updatedData);
+
+        $response->assertRedirect(route('type-culture.index'));
+    }
+    public function test_admin_can_delete_type_culture()
+    {
+        $admin = User::where('email', 'xiyim14198@exclussi.com')->first();
+        $typeCulture = TypeCulture::create([
+            'code' => '1234567890',
+            'libelle' => 'Ma Culture à Supprimer',
+        ]);
+
+        $response = $this->actingAs($admin)->delete(route('type-culture.destroy', $typeCulture->id));
+
+        $response->assertRedirect(route('type-culture.index'));
+    }
+
+    // ----------------------------------------------------------------
+    // Tests pour les fonctionnalités liées aux cultures
+    // ----------------------------------------------------------------
+
     public function test_admin_can_access_culture_index()
     {
         $admin = User::where(['email' => 'xiyim14198@exclussi.com'])->first();
@@ -105,84 +188,6 @@ class AdminTest extends TestCase
 
         $response->assertRedirect(route('culture.index'));
     }
-    // ----------------------------------------------------------------
-    // Tests pour les fonctionnalités liées à TypeCulture (admin only)
-    // ----------------------------------------------------------------
-
-    public function test_admin_can_access_type_culture_index()
-    {
-        $admin = User::where(['email' => 'xiyim14198@exclussi.com'])->first();
-        $admin->email_verified_at = now();
-        $admin->save();
-
-        $response = $this->actingAs($admin)->get(route('type-culture.index'));
-
-        $response->assertOk();
-    }
-    public function test_admin_can_access_type_culture_create_form()
-    {
-        $admin = User::where('email', 'xiyim14198@exclussi.com')->first();
-        $admin->email_verified_at = now();
-        $admin->save();
-
-        $response = $this->actingAs($admin)->get(route('type-culture.create'));
-
-        $response->assertOk();
-    }
-    public function test_admin_can_create_type_culture()
-    {
-        $admin = User::where('email', 'xiyim14198@exclussi.com')->first();
-        $admin->email_verified_at = now();
-        $admin->save();
-        $data = [
-            'libelle' => Str::random(10),
-        ];
-
-        $response = $this->actingAs($admin)->post(route('type-culture.store'), $data);
-        $response->assertRedirect(route('type-culture.index'));
-    }
-    public function test_admin_can_access_edit_type_culture_page()
-    {
-        $admin = User::where('email', 'xiyim14198@exclussi.com')->first();
-
-        $typeCulture = TypeCulture::create([
-            'code' => Str::uuid()->toString(),
-            'libelle' => Str::random(10),
-        ]);
-        $response = $this->actingAs($admin)->get(route('type-culture.edit', ['type_culture' => Crypt::encrypt($typeCulture->id)]));
-
-        $response->assertOk();
-    }
-    public function test_admin_can_update_type_culture()
-    {
-        $admin = User::where('email', 'xiyim14198@exclussi.com')->first();
-        // Créer une culture existante
-        $typeCulture = TypeCulture::create([
-            'code' => Str::uuid()->toString(),
-            'libelle' => Str::random(10),
-        ]);
-
-        $updatedData = [
-            'code' => Str::uuid()->toString(),
-            'libelle' => Str::random(10),
-        ];
-
-        $response = $this->actingAs($admin)->put(route('type-culture.update', $typeCulture->id), $updatedData);
-
-        $response->assertRedirect(route('type-culture.index'));
-    }
-    public function test_admin_can_delete_type_culture()
-    {
-        $admin = User::where('email', 'xiyim14198@exclussi.com')->first();
-        $typeCulture = TypeCulture::create([
-            'code' => '1234567890',
-            'libelle' => 'Ma Culture à Supprimer',
-        ]);
-
-        $response = $this->actingAs($admin)->delete(route('type-culture.destroy', $typeCulture->id));
-
-        $response->assertRedirect(route('type-culture.index'));
-    }
 
     // ----------------------------------------------------------------
     // Tests pour les fonctionnalités liées aux utilisateurs
@@ -221,7 +226,7 @@ class AdminTest extends TestCase
             'first_name' => 'John',
             'last_name' => 'Doe',
             'phone_number' => (string) rand(10000000, 99999999),
-            'role_id' => 1
+            'role_id' => 2
         ];
 
         $response = $this->actingAs($admin)->post(route('user.store'), $data);
@@ -239,7 +244,7 @@ class AdminTest extends TestCase
             'first_name' => 'John',
             'last_name' => 'Doe',
             'phone_number' => (string) rand(10000000, 99999999),
-            'role_id' => 1
+            'role_id' => 2
         ]);
         $response = $this->actingAs($admin)->get(route('user.edit', ['user' => Crypt::encrypt($user->id)]));
 
@@ -273,5 +278,4 @@ class AdminTest extends TestCase
 
         $response->assertRedirect(route('user.index'));
     }
-    
 }

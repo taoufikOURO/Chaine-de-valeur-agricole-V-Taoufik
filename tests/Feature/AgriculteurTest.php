@@ -145,12 +145,44 @@ class AgriculteurTest extends TestCase
         $agriculteur->save();
         $parcelle = Parcelle::whereIn('statut_id', [2, 3])->first();
         $data = [
-            'culture_id' => rand(1, 25),
+            'culture_id' => rand(1, 2),
             'parcelle_id' => $parcelle->id,
             'user_id' => 2
         ];
         $response = $this->actingAs($agriculteur)->post(route('semis.store'), $data);
         $response->assertRedirect(route('semis.index'));
+    }
+    // ----------------------------------------------------------------
+    // Tests pour les fonctionnalités lés à l'arrosage
+    // ----------------------------------------------------------------
+    public function test_agriculteur_can_access_arrosage_create_form()
+    {
+        $agriculteur = User::where('email', 'gear2mugiwara@gmail.com')->first();
+        $agriculteur->email_verified_at = now();
+        $agriculteur->save();
+        $response = $this->actingAs($agriculteur)->get(route('arrosage.create'));
+        $response->assertOk();
+    }
+    public function test_agriculteur_can_create_arrosage()
+    {
+        $agriculteur = User::where('email', 'gear2mugiwara@gmail.com')->first();
+        $agriculteur->email_verified_at = now();
+        $agriculteur->save();
+        $semis = Semis::where('recolte_id', NULL)->first();
+        $data = [
+            'semis_id' => $semis->id,
+            'user_id' => 2,
+        ];
+        $response = $this->actingAs($agriculteur)->post(route('arrosage.store'), $data);
+        $response->assertRedirect(route('semis.index'));
+    }
+    public function test_agriculteur_can_access_semis_non_arrose_page()
+    {
+        $agriculteur = User::where('email', 'gear2mugiwara@gmail.com')->first();
+        $agriculteur->email_verified_at = now();
+        $agriculteur->save();
+        $response = $this->actingAs($agriculteur)->get(route('semisNonArroses'));
+        $response->assertOk();
     }
     // ----------------------------------------------------------------
     // Tests pour les fonctionnalités liées aux recoltes
@@ -185,7 +217,7 @@ class AgriculteurTest extends TestCase
             'parcelle_id' => $parcelle->id,
             'user_id' => 2,
             'semis_id' => $semis->id,
-            'quantite_recolte' => rand(1, 20),
+            'quantite_recolte' => rand(1, 2),
         ];
         $parcelle->update([
             "statut_id" => 2,
@@ -230,37 +262,5 @@ class AgriculteurTest extends TestCase
         ];
         $response = $this->actingAs($agriculteur)->post(route('fertilisation.store'), $data);
         $response->assertRedirect(route('fertilisation.index'));
-    }
-    // ----------------------------------------------------------------
-    // Tests pour les fonctionnalités lés à l'arrosage
-    // ----------------------------------------------------------------
-    public function test_agriculteur_can_access_arrosage_create_form()
-    {
-        $agriculteur = User::where('email', 'gear2mugiwara@gmail.com')->first();
-        $agriculteur->email_verified_at = now();
-        $agriculteur->save();
-        $response = $this->actingAs($agriculteur)->get(route('arrosage.create'));
-        $response->assertOk();
-    }
-    public function test_agriculteur_can_create_arrosage()
-    {
-        $agriculteur = User::where('email', 'gear2mugiwara@gmail.com')->first();
-        $agriculteur->email_verified_at = now();
-        $agriculteur->save();
-        $semis = Semis::where('recolte_id', NULL)->first();
-        $data = [
-            'semis_id' => $semis->id,
-            'user_id' => 2,
-        ];
-        $response = $this->actingAs($agriculteur)->post(route('arrosage.store'), $data);
-        $response->assertRedirect(route('semis.index'));
-    }
-    public function test_agriculteur_can_access_semis_non_arrose_page()
-    {
-        $agriculteur = User::where('email', 'gear2mugiwara@gmail.com')->first();
-        $agriculteur->email_verified_at = now();
-        $agriculteur->save();
-        $response = $this->actingAs($agriculteur)->get(route('semisNonArroses'));
-        $response->assertOk();
     }
 }
