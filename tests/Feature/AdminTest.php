@@ -183,4 +183,95 @@ class AdminTest extends TestCase
 
         $response->assertRedirect(route('type-culture.index'));
     }
+
+    // ----------------------------------------------------------------
+    // Tests pour les fonctionnalités liées aux utilisateurs
+    // ----------------------------------------------------------------
+
+    public function test_admin_can_access_user_index()
+    {
+        $admin = User::where(['email' => 'xiyim14198@exclussi.com'])->first();
+        $admin->email_verified_at = now();
+        $admin->save();
+
+        $response = $this->actingAs($admin)->get(route('user.index'));
+
+        $response->assertOk();
+    }
+    public function test_admin_can_access_user_create_form()
+    {
+        $admin = User::where('email', 'xiyim14198@exclussi.com')->first();
+        $admin->email_verified_at = now();
+        $admin->save();
+
+        $response = $this->actingAs($admin)->get(route('user.create'));
+
+        $response->assertOk();
+    }
+    public function test_admin_can_create_user()
+    {
+        $admin = User::where('email', 'xiyim14198@exclussi.com')->first();
+        $admin->email_verified_at = now();
+        $admin->save();
+        $data = [
+            'username' => Str::random(10),
+            'email' => Str::random(5) . '@example.com',
+            'password' => 'password123',
+            'password_confirmation' => 'password123',
+            'first_name' => 'John',
+            'last_name' => 'Doe',
+            'phone_number' => (string) rand(10000000, 99999999),
+            'role_id' => 1
+        ];
+
+        $response = $this->actingAs($admin)->post(route('user.store'), $data);
+        $response->assertRedirect(route('user.index'));
+    }
+    public function test_admin_can_access_edit_user_page()
+    {
+        $admin = User::where('email', 'xiyim14198@exclussi.com')->first();
+
+        $user = User::create([
+            'username' => Str::random(10),
+            'email' => Str::random(5) . '@example.com',
+            'password' => 'password123',
+            'password_confirmation' => 'password123',
+            'first_name' => 'John',
+            'last_name' => 'Doe',
+            'phone_number' => (string) rand(10000000, 99999999),
+            'role_id' => 1
+        ]);
+        $response = $this->actingAs($admin)->get(route('user.edit', ['user' => Crypt::encrypt($user->id)]));
+
+        $response->assertOk();
+    }
+    public function test_admin_can_update_user()
+    {
+        $admin = User::where('email', 'xiyim14198@exclussi.com')->first();
+        // Créer une culture existante
+        $user = User::create([
+            'username' => Str::random(10),
+            'email' => Str::random(5) . '@example.com',
+            'password' => 'password123',
+            'password_confirmation' => 'password123',
+            'first_name' => 'John',
+            'last_name' => 'Doe',
+            'phone_number' => (string) rand(10000000, 99999999),
+            'role_id' => 1
+        ]);
+
+        $updatedData = [
+            'username' => Str::random(10),
+            'first_name' => 'John',
+            'last_name' => 'Doe',
+            'phone_number' => (string) rand(10000000, 99999999),
+            'role_id' => 1,
+            'active' => false,
+        ];
+
+        $response = $this->actingAs($admin)->put(route('user.update', $user->id), $updatedData);
+
+        $response->assertRedirect(route('user.index'));
+    }
+    
 }
