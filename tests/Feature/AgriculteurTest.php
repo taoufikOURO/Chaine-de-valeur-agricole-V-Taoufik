@@ -16,7 +16,7 @@ class AgriculteurTest extends TestCase
 {
     public function test_agriculteur_can_access_stats_agriculteur()
     {
-        $agriculteur = User::where(['email' => 'gear2mugiwara@gmail.com'])->first();
+        $agriculteur = User::where('email', 'gear2mugiwara@gmail.com')->first();
         $agriculteur->email_verified_at = now();
         $agriculteur->save();
         $response = $this->actingAs($agriculteur)->get(route('stats.agriculteur'));
@@ -25,7 +25,7 @@ class AgriculteurTest extends TestCase
 
     public function test_agriculteur_can_access_parcelle_index()
     {
-        $agriculteur = User::where(['email' => 'gear2mugiwara@gmail.com'])->first();
+        $agriculteur = User::where('email', 'gear2mugiwara@gmail.com')->first();
         $agriculteur->email_verified_at = now();
         $agriculteur->save();
         $response = $this->actingAs($agriculteur)->get(route('parcelle.index'));
@@ -34,7 +34,7 @@ class AgriculteurTest extends TestCase
 
     public function test_agriculteu_can_access_parcelle_create_form()
     {
-        $agriculteur = User::where(['email' => 'gear2mugiwara@gmail.com'])->first();
+        $agriculteur = User::where('email', 'gear2mugiwara@gmail.com')->first();
         $agriculteur->email_verified_at = now();
         $agriculteur->save();
 
@@ -115,7 +115,7 @@ class AgriculteurTest extends TestCase
 
     public function test_agriculteur_can_access_semis_index()
     {
-        $agriculteur = User::where(['email' => 'gear2mugiwara@gmail.com'])->first();
+        $agriculteur = User::where('email', 'gear2mugiwara@gmail.com')->first();
         $agriculteur->email_verified_at = now();
         $agriculteur->save();
         $response = $this->actingAs($agriculteur)->get(route('semis.index'));
@@ -123,7 +123,7 @@ class AgriculteurTest extends TestCase
     }
     public function test_agriculteur_can_access_semis_history()
     {
-        $agriculteur = User::where(['email' => 'gear2mugiwara@gmail.com'])->first();
+        $agriculteur = User::where('email', 'gear2mugiwara@gmail.com')->first();
         $agriculteur->email_verified_at = now();
         $agriculteur->save();
         $response = $this->actingAs($agriculteur)->get(route('historique.semis'));
@@ -132,7 +132,7 @@ class AgriculteurTest extends TestCase
 
     public function test_agriculteur_can_access_semis_create_form()
     {
-        $agriculteur = User::where(['email' => 'gear2mugiwara@gmail.com'])->first();
+        $agriculteur = User::where('email', 'gear2mugiwara@gmail.com')->first();
         $agriculteur->email_verified_at = now();
         $agriculteur->save();
         $response = $this->actingAs($agriculteur)->get(route('semis.create'));
@@ -158,7 +158,7 @@ class AgriculteurTest extends TestCase
 
     public function test_agriculteur_can_access_recoltes_index()
     {
-        $agriculteur = User::where(['email' => 'gear2mugiwara@gmail.com'])->first();
+        $agriculteur = User::where('email', 'gear2mugiwara@gmail.com')->first();
         $agriculteur->email_verified_at = now();
         $agriculteur->save();
         $response = $this->actingAs($agriculteur)->get(route('recolte.index'));
@@ -166,7 +166,7 @@ class AgriculteurTest extends TestCase
     }
     public function test_agriculteur_can_access_recolte_create_form()
     {
-        $agriculteur = User::where(['email' => 'gear2mugiwara@gmail.com'])->first();
+        $agriculteur = User::where('email', 'gear2mugiwara@gmail.com')->first();
         $agriculteur->email_verified_at = now();
         $agriculteur->save();
         $response = $this->actingAs($agriculteur)->get(route('recolte.create'));
@@ -174,11 +174,11 @@ class AgriculteurTest extends TestCase
     }
     public function test_agriculteur_can_create_recolte()
     {
-        $agriculteur = User::where(['email' => 'gear2mugiwara@gmail.com'])->first();
+        $agriculteur = User::where('email', 'gear2mugiwara@gmail.com')->first();
         $agriculteur->email_verified_at = now();
         $agriculteur->save();
-        $semis = Semis::where(['user_id' => 2])
-            ->where(['recolte_id' => null])
+        $semis = Semis::where('user_id', 2)
+            ->where('recolte_id', null)
             ->first();
         $parcelle = Parcelle::where('id', $semis->parcelle_id)->first();
         $data = [
@@ -203,7 +203,7 @@ class AgriculteurTest extends TestCase
 
     public function test_agriculteur_can_access_fertilisation_index()
     {
-        $agriculteur = User::where(['email' => 'gear2mugiwara@gmail.com'])->first();
+        $agriculteur = User::where('email', 'gear2mugiwara@gmail.com')->first();
         $agriculteur->email_verified_at = now();
         $agriculteur->save();
         $response = $this->actingAs($agriculteur)->get(route('fertilisation.index'));
@@ -211,7 +211,7 @@ class AgriculteurTest extends TestCase
     }
     public function test_agriculteur_can_access_fertilisation_create_form()
     {
-        $agriculteur = User::where(['email' => 'gear2mugiwara@gmail.com'])->first();
+        $agriculteur = User::where('email', 'gear2mugiwara@gmail.com')->first();
         $agriculteur->email_verified_at = now();
         $agriculteur->save();
         $response = $this->actingAs($agriculteur)->get(route('fertilisation.create'));
@@ -219,7 +219,7 @@ class AgriculteurTest extends TestCase
     }
     public function test_agriculteur_can_create_fertilisation()
     {
-        $agriculteur = User::where(['email' => 'gear2mugiwara@gmail.com'])->first();
+        $agriculteur = User::where('email', 'gear2mugiwara@gmail.com')->first();
         $agriculteur->email_verified_at = now();
         $agriculteur->save();
         $parcelle = Parcelle::where('statut_id', 3)->first();
@@ -236,7 +236,7 @@ class AgriculteurTest extends TestCase
     // ----------------------------------------------------------------
     public function test_agriculteur_can_access_arrosage_create_form()
     {
-        $agriculteur = User::where(['email' => 'gear2mugiwara@gmail.com'])->first();
+        $agriculteur = User::where('email', 'gear2mugiwara@gmail.com')->first();
         $agriculteur->email_verified_at = now();
         $agriculteur->save();
         $response = $this->actingAs($agriculteur)->get(route('arrosage.create'));
@@ -244,7 +244,7 @@ class AgriculteurTest extends TestCase
     }
     public function test_agriculteur_can_create_arrosage()
     {
-        $agriculteur = User::where(['email' => 'gear2mugiwara@gmail.com'])->first();
+        $agriculteur = User::where('email', 'gear2mugiwara@gmail.com')->first();
         $agriculteur->email_verified_at = now();
         $agriculteur->save();
         $semis = Semis::where('recolte_id', NULL)->first();
@@ -257,7 +257,7 @@ class AgriculteurTest extends TestCase
     }
     public function test_agriculteur_can_access_semis_non_arrose_page()
     {
-        $agriculteur = User::where(['email' => 'gear2mugiwara@gmail.com'])->first();
+        $agriculteur = User::where('email', 'gear2mugiwara@gmail.com')->first();
         $agriculteur->email_verified_at = now();
         $agriculteur->save();
         $response = $this->actingAs($agriculteur)->get(route('semisNonArroses'));
