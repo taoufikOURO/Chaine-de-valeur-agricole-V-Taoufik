@@ -165,7 +165,8 @@ class StatisticsController extends Controller
         return view('pages.graphes', compact('stats'));
     }
 
-    public function statsAgriculteur() {
+    public function statsAgriculteur()
+    {
         $data = $this->getStatsAgriculteur();
         return StaticFunction::stream('agriculteur-stats', ['data' => $data], 'statistiques');
     }
@@ -216,7 +217,11 @@ class StatisticsController extends Controller
             'semis.culture',
             'fertilisation',
             'recolte'
-        ])->get();
+        ])
+            ->whereHas('semis')
+            ->whereHas('fertilisation')
+            ->whereHas('recolte')
+            ->get();
 
 
         $data = $parcelles->map(function ($parcelle) {

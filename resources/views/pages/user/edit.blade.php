@@ -43,7 +43,7 @@
 </style>
 @extends('layout.layout')
 
-@section('title', 'Créer un type de culture')
+@section('title', 'Modifier un utilisateur')
 
 @section('content')
     @if (session('showErrorModal'))

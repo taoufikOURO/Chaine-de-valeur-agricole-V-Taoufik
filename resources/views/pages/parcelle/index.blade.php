@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="{{ asset('css/type-culture/index.css') }}">
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
+@section('title', 'Liste des parcelles')
 @section('content')
     @if (session('showSuccessModal'))
         @include('components.success-modal')
@@ -148,7 +149,6 @@
                     </tbody>
                 </table>
             </div>
-            <div id="map" class="mt-10 rounded-5" style="height: 500px; width: 800px;"></div>
 
             <!-- État vide (s'affiche lorsqu'aucun résultat ne correspond à la recherche) -->
             <div id="emptyState" class="empty-state mt-6">
@@ -161,11 +161,11 @@
                 <p class="text-gray-500">Aucune donnée ne correspond à votre recherche.</p>
             </div>
 
-            <!-- Information sur le nombre de résultats -->
-            <div class="mt-5 text-sm text-gray-600 flex justify-between items-center">
+            <div class=" text-sm text-gray-600 flex justify-between items-center">
                 {{ $parcelles->links('pagination::tailwind') }}
             </div>
         </div>
+        <div id="map" class=" rounded-5" style="height: 500px; width: 800px;"></div>
         @include('components.confirmation-modal', [
             'title' => 'Confirmer la suppression',
             'message' => 'Êtes-vous sûr de vouloir supprimer cet élément ?',
@@ -206,8 +206,6 @@
                 }, index * 1200); // 1,2 secondes entre chaque requête
             });
         </script>
-
-
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 const modal = document.getElementById('formConfirmationModal');

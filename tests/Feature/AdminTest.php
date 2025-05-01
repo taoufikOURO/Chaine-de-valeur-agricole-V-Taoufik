@@ -20,7 +20,6 @@ class AdminTest extends TestCase
         $admin->save();
         $response = $this->actingAs($admin)->get(route('stats.global'));
 
-        // Vérifier qu'il a bien accès (statut HTTP 200)
         $response->assertOk();
     }
     // ----------------------------------------------------------------
@@ -64,7 +63,7 @@ class AdminTest extends TestCase
         $admin = User::where('email', 'xiyim14198@exclussi.com')->first();
 
         $typeCulture = TypeCulture::create([
-            'code' => Str::uuid()->toString(),
+            'code' => 'TYC-' . strtoupper(Str::random(5)),
             'libelle' => Str::random(10),
         ]);
         $response = $this->actingAs($admin)->get(route('type-culture.edit', ['type_culture' => Crypt::encrypt($typeCulture->id)]));
@@ -76,12 +75,12 @@ class AdminTest extends TestCase
         $admin = User::where('email', 'xiyim14198@exclussi.com')->first();
         // Créer une culture existante
         $typeCulture = TypeCulture::create([
-            'code' => Str::uuid()->toString(),
+            'code' => 'TYC-' . strtoupper(Str::random(5)),
             'libelle' => Str::random(10),
         ]);
 
         $updatedData = [
-            'code' => Str::uuid()->toString(),
+            'code' => 'TYC-' . strtoupper(Str::random(5)),
             'libelle' => Str::random(10),
         ];
 
@@ -93,7 +92,7 @@ class AdminTest extends TestCase
     {
         $admin = User::where('email', 'xiyim14198@exclussi.com')->first();
         $typeCulture = TypeCulture::create([
-            'code' => '1234567890',
+            'code' => 'TYC-' . strtoupper(Str::random(5)),
             'libelle' => 'Ma Culture à Supprimer',
         ]);
 
@@ -127,7 +126,6 @@ class AdminTest extends TestCase
         $response->assertOk();
     }
 
-    /* Ce test peut ne pas marcher si le random donne le même nom de culture .... le nom est unique donc.... */
     public function test_admin_can_create_culture()
     {
         $admin = User::where('email', 'xiyim14198@exclussi.com')->first();
@@ -147,7 +145,7 @@ class AdminTest extends TestCase
         $admin = User::where('email', 'xiyim14198@exclussi.com')->first();
 
         $culture = Culture::create([
-            'code' => Str::uuid()->toString(),
+            'code' => 'CUL-' . strtoupper(Str::random(5)),
             'nom' => Str::random(10),
             'type_culture_id' => 1,
         ]);
@@ -158,15 +156,14 @@ class AdminTest extends TestCase
     public function test_admin_can_update_culture()
     {
         $admin = User::where('email', 'xiyim14198@exclussi.com')->first();
-        // Créer une culture existante
         $culture = Culture::create([
-            'code' => Str::uuid()->toString(),
+            'code' => 'CUL-' . strtoupper(Str::random(5)),
             'nom' => Str::random(10),
             'type_culture_id' => 1,
         ]);
 
         $updatedData = [
-            'code' => Str::uuid()->toString(),
+            'code' => 'CUL-' . strtoupper(Str::random(5)),
             'nom' => Str::random(10),
             'type_culture_id' => 1,
         ];
@@ -179,7 +176,7 @@ class AdminTest extends TestCase
     {
         $admin = User::where('email', 'xiyim14198@exclussi.com')->first();
         $culture = Culture::create([
-            'code' => '1234567890',
+            'code' => 'CUL-' . strtoupper(Str::random(5)),
             'nom' => 'Ma Culture à Supprimer',
             'type_culture_id' => 1,
         ]);
@@ -253,7 +250,6 @@ class AdminTest extends TestCase
     public function test_admin_can_update_user()
     {
         $admin = User::where('email', 'xiyim14198@exclussi.com')->first();
-        // Créer une culture existante
         $user = User::create([
             'username' => Str::random(10),
             'email' => Str::random(5) . '@example.com',

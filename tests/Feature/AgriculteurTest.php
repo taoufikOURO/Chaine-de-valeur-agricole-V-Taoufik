@@ -49,7 +49,7 @@ class AgriculteurTest extends TestCase
         $agriculteur->email_verified_at = now();
         $agriculteur->save();
         $data = [
-            'code' => Str::uuid()->toString(),
+            'code' => 'PAR-' . strtoupper(Str::random(5)),
             'nom' => Str::random(10),
             'surface' => 30,
             'adresse' => 'Lomé',
@@ -63,7 +63,7 @@ class AgriculteurTest extends TestCase
     {
         $agriculteur = User::where('email', 'gear2mugiwara@gmail.com')->first();
         $parcelle = Parcelle::create([
-            'code' => Str::uuid()->toString(),
+            'code' => 'PAR-' . strtoupper(Str::random(5)),
             'nom' => Str::random(10),
             'surface' => 30,
             'adresse' => 'Lomé',
@@ -77,7 +77,7 @@ class AgriculteurTest extends TestCase
     {
         $agriculteur = User::where('email', 'gear2mugiwara@gmail.com')->first();
         $parcelle = Parcelle::create([
-            'code' => Str::uuid()->toString(),
+            'code' => 'PAR-' . strtoupper(Str::random(5)),
             'nom' => Str::random(10),
             'surface' => 30,
             'adresse' => 'Lomé',
@@ -99,7 +99,7 @@ class AgriculteurTest extends TestCase
     {
         $agriculteur = User::where('email', 'gear2mugiwara@gmail.com')->first();
         $parcelle = Parcelle::create([
-            'code' => Str::uuid()->toString(),
+            'code' => 'PAR-' . strtoupper(Str::random(5)),
             'nom' => Str::random(10),
             'surface' => 30,
             'adresse' => 'Lomé',
@@ -109,6 +109,7 @@ class AgriculteurTest extends TestCase
         $response = $this->actingAs($agriculteur)->delete(route('parcelle.destroy', $parcelle->id));
         $response->assertRedirect(route('parcelle.index'));
     }
+
     // ----------------------------------------------------------------
     // Tests pour les fonctionnalités liées aux semis
     // ----------------------------------------------------------------
@@ -184,6 +185,7 @@ class AgriculteurTest extends TestCase
         $response = $this->actingAs($agriculteur)->get(route('semisNonArroses'));
         $response->assertOk();
     }
+
     // ----------------------------------------------------------------
     // Tests pour les fonctionnalités liées aux recoltes
     // ----------------------------------------------------------------

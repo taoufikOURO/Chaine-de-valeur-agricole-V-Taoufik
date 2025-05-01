@@ -34,9 +34,10 @@ class SemisController extends Controller
 
     public function create()
     {
-        $cultures = Culture::all();
+        $cultures = Culture::orderByDesc('created_at')->get();
         $parcelles = Parcelle::where('user_id', Auth::user()->id)
             ->where('statut_id', 3)
+            ->orderByDesc('created_at')
             ->get();
         return view('pages.semis.create', compact('cultures', 'parcelles'));
     }

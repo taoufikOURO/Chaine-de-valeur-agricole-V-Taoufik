@@ -42,6 +42,7 @@
 </style>
 @extends('layout.layout')
 
+@section('title', 'Modifier une parcelle')
 
 @section('content')
     @if (session('showErrorModal'))
@@ -114,7 +115,7 @@
                                 <option value="" disabled selected> Veuillez sélectionnez un statut pour votre parcelle </option>
                                 @foreach ($statuts as $statut)
                                     @unless (in_array($statut->libelle, ['en_culture', 'recoltee']))
-                                        <option value="{{ $statut->id }}">En Jachère</option>
+                                        <option value="{{ $statut->id }}" selected>En Jachère</option>
                                     @endunless
                                 @endforeach
                             </select>

@@ -40,7 +40,7 @@
 </style>
 @extends('layout.layout')
 
-@section('title', 'Créer un type de culture')
+@section('title', 'Modifier un type de culture')
 
 @section('content')
     @if (session('showErrorModal'))

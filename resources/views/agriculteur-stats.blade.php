@@ -4,168 +4,219 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page</title>
+    <title>Statistiques Agricoles</title>
     <style>
+        :root {
+            --primary-color: #2c7744;
+            --secondary-color: #f8f9fa;
+            --accent-color: #e9ecef;
+            --text-color: #333;
+            --border-color: #dee2e6;
+            --success-color: #28a745;
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
-            padding: 0;
+            padding: 20px;
+            color: var(--text-color);
+            background-color: #fff;
             position: relative;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 15px;
+        }
+
+        .logo {
+            height: 80px;
+            width: auto;
+        }
+
+        .header-info {
+            text-align: right;
+            font-size: 14px;
+        }
+
+        .header-info p {
+            margin: 0;
+            padding: 3px 0;
+        }
+
+        .title {
+            text-align: center;
+            margin: 20px 0;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .title h2 {
+            margin: 0;
+            font-weight: 600;
+            border-bottom: 3px solid var(--primary-color);
+            display: inline-block;
+            padding-bottom: 5px;
         }
 
         table {
             border-collapse: collapse;
             width: 100%;
-            font-size: 10px;
-            margin-top: -10px;
+            font-size: 14px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         th,
         td {
-            border: 1px solid black;
+            border: 1px solid var(--border-color);
             text-align: left;
-            padding: 3px;
-        }
-
-        .td-right {
-            border: 1px solid black;
-            text-align: right;
-            padding: 3px;
+            padding: 10px;
         }
 
         th {
-            background-color: #FFFFFF;
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 500;
         }
 
-        tfoot td {
+        .parcelle-header {
+            background-color: var(--accent-color);
             font-weight: bold;
-            background-color: #FFFFFF;
+            font-size: 16px;
+            color: var(--primary-color);
         }
 
-        /* Positionnement absolu des mentions dans le coin supérieur droit */
-        .header-info {
-            position: absolute;
-            top: 1px;
-            right: 10px;
-            text-align: left;
-            font-size: 12px;
+        .section-header {
+            background-color: var(--secondary-color);
+            font-weight: bold;
+            color: var(--text-color);
         }
 
-        .header-info p {
-            margin: -5;
-            padding: 5px 0;
+        .text-center {
+            text-align: center;
         }
 
-        /* Positionnement du logo */
-        .logo {
-            margin-top: -110px;
-            margin-bottom: -50px;
-            display: block;
-            width: auto;
-            height: 190;
-        }
-
-        /* Positionnement absolu des mentions dans les coins */
-        .timbre-bureau {
-            position: absolute;
-            top: 915px;
-            left: 0;
-            text-align: left;
-            font-size: 12px;
-            margin: 0;
-        }
-
-        .signature-agent {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            text-align: left;
-            font-size: 12px;
-            margin: 0;
-        }
-
-        .timbre-transporteur {
-            position: absolute;
-            top: 915px;
-            right: 0;
+        .text-right {
             text-align: right;
+        }
+
+        .recolte-row:nth-child(even) {
+            background-color: var(--secondary-color);
+        }
+
+        .recolte-row:hover {
+            background-color: #e8f4ea;
+        }
+
+        .quantity {
+            font-weight: bold;
+            color: var(--success-color);
+        }
+
+        .footer {
+            margin-top: 40px;
+            text-align: center;
             font-size: 12px;
-            margin: 0;
+            color: #6c757d;
+            border-top: 1px solid var(--border-color);
+            padding-top: 15px;
         }
 
-        .signature-transporteur {
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            text-align: right;
-            font-size: 12px;
-            margin: 0;
-        }
+        @media print {
+            body {
+                padding: 0;
+                font-size: 12px;
+            }
 
-        .title {
-            margin-top: -30px;
-        }
+            .logo {
+                height: 60px;
+            }
 
-        .total {
-            text-align: center
+            table {
+                font-size: 11px;
+                box-shadow: none;
+            }
+
+            th,
+            td {
+                padding: 5px;
+            }
         }
     </style>
 </head>
 
 <body>
-    <img src="logo.svg" alt="logo">
-    <div class="header-info">
-        <p><strong>Lomé, le </strong> {{ \Carbon\Carbon::now()->translatedFormat('d M Y') }}</p>
-    </div>
+    <div class="container">
+        <div class="header">
+            <img src="logo.svg" alt="logo" class="logo">
+            <div class="header-info">
+                <p><strong>Lomé, le</strong> {{ \Carbon\Carbon::now()->translatedFormat('d M Y') }}</p>
+                <p><strong>Rapport généré automatiquement</strong></p>
+            </div>
+        </div>
 
-    <div class="title">
-        <h4> <strong>STATISTIQUES GLOBALES</strong></h4>
-    </div>
+        <div class="title">
+            <h2>STATISTIQUES GLOBALES</h2>
+        </div>
 
-    <table>
-        <thead>
-            <tr>
-                <th>COL 1</th>
-                <th>COL 2</th>
-                <th>COL 3</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($data as $parcelle)
-                <tr>
-                    <th colspan="3" style=" text-align: center">
-                        {{ $parcelle['nom'] }}
-                    </th>
-                </tr>
-                <tr>
-                    <th colspan="3" style=" text-align: center">
-                        RECOLTES
-                    </th>
-                </tr>
-                <tr>
-                    <th scope="col" style=" text-align: center">
-                        Date de la récolte
-                    </th>
-                    <th scope="col" style=" text-align: center">
-                        Culture récoltée
-                    </th>
-                    <th scope="col" style=" text-align: center">
-                        Quantité récoltée
-                    </th>
-                </tr>
-                @foreach ($parcelle['recoltes'] as $recolte)
+        @foreach ($data as $parcelle)
+            <table>
+                <thead>
                     <tr>
-                        <th scope="col" style=" text-align: center"> Date récolte: {{ $recolte['date_recolte'] }}
+                        <th colspan="3" class="parcelle-header text-center">
+                            {{ $parcelle['nom'] }}
                         </th>
-                        <th scope="col" style=" text-align: center">
-                            {{ $recolte['semis']['culture']['nom_culture'] }} du {{ $recolte['semis']['date_semis'] }}
-                        </th>
-                        <th scope="col" style=" text-align: center"> {{ $recolte['qte'] }} </th>
                     </tr>
-                @endforeach
-        </tbody>
+                    <tr>
+                        <th colspan="3" class="section-header text-center">
+                            RÉCOLTES
+                        </th>
+                    </tr>
+                    <tr>
+                        <th class="text-center">Date de la récolte</th>
+                        <th class="text-center">Culture récoltée</th>
+                        <th class="text-center">Quantité récoltée</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($parcelle['recoltes'] as $recolte)
+                        <tr class="recolte-row">
+                            <td class="text-center">{{ $recolte['date_recolte'] }}</td>
+                            <td class="text-center">
+                                {{ $recolte['semis']['culture']['nom_culture'] }} <br>
+                                <small>Semé le {{ $recolte['semis']['date_semis'] }}</small>
+                            </td>
+                            <td class="text-center quantity">{{ $recolte['qte'] }}</td>
+                        </tr>
+                    @endforeach
+
+                    @if (count($parcelle['recoltes']) == 0)
+                        <tr>
+                            <td colspan="3" class="text-center">Aucune récolte enregistrée</td>
+                        </tr>
+                    @endif
+                </tbody>
+            </table>
         @endforeach
-    </table>
+
+        <div class="footer">
+            <img src="logo.svg" alt="logo" class="logo">
+            <p style="margin-top: -20px">© {{ date('Y') }} - Gestion de chaine de valeur agricoles | Agro Tracker</p>
+        </div>
+    </div>
 </body>
 
 </html>

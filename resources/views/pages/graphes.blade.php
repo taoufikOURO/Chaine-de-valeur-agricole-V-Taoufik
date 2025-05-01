@@ -1,5 +1,7 @@
 @extends('layout.layout')
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+@section('title', 'Graphes')
+
 
 @section('content')
     @if (Auth::user()->role->libelle === 'admin')
