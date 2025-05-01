@@ -26,8 +26,10 @@
             <div id="toggle-btn" data-tooltip="Réduire le menu" class="cursor-pointer">
                 @include('components.logo')
             </div>
-            <h1 class="logo-text text-3xl font-extrabold text-gray-900 tracking-tight flex items-center gap-4 md:block">
-                Mon Appli
+            <h1 class="logo-text text-3xl font-extrabold tracking-tight text-gray-900 flex items-center gap-3 md:block">
+                <span class="bg-gradient-to-r from-green-700 to-lime-600 bg-clip-text text-transparent">
+                    Agro Tracker
+                </span>
             </h1>
         </div>
 
@@ -162,8 +164,10 @@
 
                 <div class="dropdown-wrapper">
                     <button class="flex items-center gap-2 cursor-pointer" id="profile-btn">
-                        <h1 class="text-sm font-extrabold text-gray-900 tracking-tight mb-6 flex items-center gap-4 md:block">
-                            <span class="border-l-4 border-green-500 pl-4">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</span>
+                        <h1
+                            class="text-sm font-extrabold text-gray-900 tracking-tight mb-6 flex items-center gap-4 md:block">
+                            <span class="border-l-4 border-green-500 pl-4">{{ Auth::user()->first_name }}
+                                {{ Auth::user()->last_name }}</span>
                         </h1>
                     </button>
 

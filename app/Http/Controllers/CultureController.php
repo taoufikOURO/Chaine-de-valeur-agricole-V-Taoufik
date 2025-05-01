@@ -44,7 +44,8 @@ class CultureController extends Controller
                 "nom.min" => "Le libelle doit contenir au moins 3 caractères"
             ]
         );
-        $fields['code'] = Str::uuid()->toString();
+        $fields['code'] = 'CUL-' . strtoupper(Str::random(5));
+
         try {
             Culture::create($fields);
             return redirect()->route('culture.index')->with([

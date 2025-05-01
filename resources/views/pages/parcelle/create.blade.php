@@ -41,6 +41,8 @@
     }
 </style>
 @extends('layout.layout')
+@section('title', 'Ajouter une parcelle')
+
 
 
 @section('content')

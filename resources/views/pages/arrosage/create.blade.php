@@ -43,7 +43,7 @@
     }
 </style>
 @extends('layout.layout')
-
+@section('title', 'Arroser un semis')
 
 @section('content')
     @if (session('showErrorModal'))

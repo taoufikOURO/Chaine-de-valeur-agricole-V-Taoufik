@@ -42,6 +42,7 @@
 </style>
 @extends('layout.layout')
 
+@section('title', 'Modifier une culture')
 
 @section('content')
     @if (session('showErrorModal'))

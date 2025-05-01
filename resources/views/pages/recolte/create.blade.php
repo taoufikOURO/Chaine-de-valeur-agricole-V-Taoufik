@@ -41,6 +41,7 @@
     }
 </style>
 @extends('layout.layout')
+@section('title', 'Récolter un semis')
 
 @section('content')
     @if (session('showErrorModal'))

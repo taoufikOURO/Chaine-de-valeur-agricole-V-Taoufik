@@ -42,6 +42,7 @@
     }
 </style>
 @extends('layout.layout')
+@section('title', 'Editer le profile')
 
 @section('content')
     @if (session('showErrorModal'))
@@ -56,9 +57,9 @@
                     <div class="mb-8 flex justify-between items-center">
                         <div>
                             <h1 class="text-4xl font-bold text-gray-900 mb-2 flex items-center">
-                                Editer son profil
+                                Editer son profile
                             </h1>
-                            <p class="text-emerald-600 font-medium ml-16">Modifier les informations de votrecompte.</p>
+                            <p class="text-emerald-600 font-medium ml-16">Modifier les informations de votre compte.</p>
                             </p>
                         </div>
                     </div>
@@ -68,7 +69,8 @@
                         @csrf
                         @method('PUT')
 
-                        <label for="email" class="block text-sm font-medium text-gray-400 mb-1 ml-2">Nom d'utilisateur</label>
+                        <label for="email" class="block text-sm font-medium text-gray-400 mb-1 ml-2">Nom
+                            d'utilisateur</label>
                         <div class="relative bg-gradient-to-b from-white to-gray-50 rounded-xl p-1 shadow-inner">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                 <i class="fa-solid fa-circle-user  text-gray-400 mr-2 ml-2"></i>

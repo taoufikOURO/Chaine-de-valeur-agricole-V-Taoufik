@@ -36,8 +36,7 @@ class TypeCultureController extends Controller
                 "libelle.min" => "Le libelle doit contenir au moins 3 caractères"
             ]
         );
-        $code = Str::uuid()->toString();
-        $fields['code'] = Str::uuid()->toString();
+        $fields['code'] = 'TYC-' . strtoupper(Str::random(5));
         try {
             TypeCulture::create($fields);
             return redirect()->route('type-culture.index')->with([

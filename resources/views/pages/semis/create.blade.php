@@ -39,6 +39,8 @@
     }
 </style>
 @extends('layout.layout')
+@section('title', 'Ajouter un semis')
+
 
 
 @section('content')

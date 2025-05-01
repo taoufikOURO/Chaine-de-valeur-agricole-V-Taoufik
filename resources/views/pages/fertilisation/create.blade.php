@@ -43,6 +43,7 @@
     }
 </style>
 @extends('layout.layout')
+@section('title', 'Fertiliser un champ')
 
 
 @section('content')

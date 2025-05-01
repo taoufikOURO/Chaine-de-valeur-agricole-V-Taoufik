@@ -76,7 +76,7 @@ class ParcelleController extends Controller
                 "statut_id.required" => "Le statut est obligatoire",
             ]
         );
-        $fields['code'] = Str::uuid()->toString();
+        $fields['code'] = 'PAR-' . strtoupper(Str::random(5));
         $fields['user_id'] = Auth::user()->id;
         $data = $this->checkCity($fields['adresse']);
 

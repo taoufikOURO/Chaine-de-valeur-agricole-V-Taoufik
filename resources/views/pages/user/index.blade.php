@@ -1,5 +1,5 @@
 @extends('layout.layout')
-@section('title', 'Liste des types de culture')
+@section('title', 'Liste des utilisateurs')
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
