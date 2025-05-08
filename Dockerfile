@@ -48,5 +48,6 @@ RUN composer install --no-scripts --prefer-dist --optimize-autoloader
 # Installer les dépendances Node.js (Tailwind, etc.)
 RUN npm install
 
-# ... existing code ...
+
+# Exposer le port Laravel
 EXPOSE 8000

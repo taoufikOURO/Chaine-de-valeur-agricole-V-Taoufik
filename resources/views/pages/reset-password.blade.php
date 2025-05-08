@@ -8,6 +8,7 @@
     @vite('resources/css/app.css')
     <link rel="stylesheet" href="{{ asset('css/login.css') }}">
     <link rel="icon" type="image/svg" href="{{ asset('logo.svg') }}">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body class="min-h-screen flex items-center justify-center p-4 bg-gray-50">
