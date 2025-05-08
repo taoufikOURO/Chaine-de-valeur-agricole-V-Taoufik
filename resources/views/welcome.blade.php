@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{{ asset('css/welcome.css') }}">
     @vite('resources/css/app.css')
     <link rel="icon" type="image/svg" href="{{ asset('logo.svg') }}">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 
