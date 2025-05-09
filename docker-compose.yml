@@ -20,9 +20,9 @@ services:
             DB_CONNECTION: mysql
             DB_HOST: db
             DB_PORT: 3306
-            DB_DATABASE: taoufik_value_chain_management
-            DB_USERNAME: taoufik
-            DB_PASSWORD: taoufik2005
+            DB_DATABASE: value_chain_management
+            DB_USERNAME: utilisateur
+            DB_PASSWORD: utilisateur10
 
     db:
         image: mysql:8
@@ -30,9 +30,9 @@ services:
         restart: unless-stopped
         environment:
             MYSQL_ROOT_PASSWORD: taoufk2005
-            MYSQL_DATABASE: taoufik_value_chain_management
-            MYSQL_USER: taoufik
-            MYSQL_PASSWORD: taoufik2005
+            MYSQL_DATABASE: value_chain_management
+            MYSQL_USER: utilisateur
+            MYSQL_PASSWORD: utilisateur
         ports:
             - "3306:3306"
         volumes:

@@ -16,7 +16,7 @@ class UserTest extends TestCase
     public function test_user_can_login(): void
     {
         $email = 'gear2mugiwara@gmail.com';
-        $password = 'taoufik2005';
+        $password = 'utilisateur1';
         $this->post(
             '/login',
             ['email' => $email, 'password' => $password]
@@ -107,8 +107,8 @@ class UserTest extends TestCase
         $response = $this->post(route('password.update'), [
             'token' => $token,
             'email' => $user->email,
-            'password' => 'taoufik2005',
-            'password_confirmation' => 'taoufik2005',
+            'password' => 'utilisateur1',
+            'password_confirmation' => 'utilisateur1',
         ]);
         $response->assertRedirect(route('login.page'));
     }

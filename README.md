@@ -99,7 +99,7 @@ Ce projet Laravel est une application web permettant aux agriculteurs de gérer 
 1. **Cloner le dépôt**
 
     ```bash
-    git clone https://github.com/taoufikOURO/Chaine-de-valeur-agricole-V-Taoufik.git
+    
 
     cd <nom-du-dossier>
     ```

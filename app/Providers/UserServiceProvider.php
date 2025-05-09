@@ -38,7 +38,7 @@ class UserServiceProvider extends ServiceProvider
                 'first_name' => 'Admin',
                 'last_name' => 'User',
                 'role_id' => Role::where('libelle', 'admin')->first()->id ?? null,
-                'password' => Hash::make('taoufik2005'), // Assure-toi d'utiliser un mot de passe sécurisé
+                'password' => Hash::make('utilisateur10'), // Assure-toi d'utiliser un mot de passe sécurisé
             ],
             [
                 'username' => 'agriculteur',
@@ -47,7 +47,7 @@ class UserServiceProvider extends ServiceProvider
                 'first_name' => 'John',
                 'last_name' => 'Doe',
                 'role_id' => Role::where('libelle', 'agriculteur')->first()->id ?? null,
-                'password' => Hash::make('taoufik2005'),
+                'password' => Hash::make('utilisateur1'),
             ]
         ];
 
